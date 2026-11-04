@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -51,20 +52,55 @@ button:focus-visible{outline:3px solid #a06a36;outline-offset:3px}
 .stop.active .stop-no{background:#762f42;color:white}
 .stop-name{display:block;font-size:14px;line-height:1.3}
 .stop-subtitle{display:block;margin-top:4px;color:#696f65;font:10px/1.4 Arial,sans-serif}
-.story-card{position:absolute;z-index:650;right:12px;bottom:12px;width:min(440px,calc(100vw - 24px));max-height:75%;display:none;overflow:hidden;background:#f1eee4;border:1px solid #cfcdbb;box-shadow:0 5px 24px #30291e2b}
-.story-header{padding:15px 17px 12px;border-bottom:1px solid #cfcdbb}
+
+/* POPRAWIONA KARTA OPISU */
+.story-card{
+  position:absolute;
+  z-index:650;
+  right:12px;
+  top:12px;
+  bottom:12px;
+  width:min(440px,calc(100vw - 24px));
+  display:none;
+  flex-direction:column;
+  overflow:hidden;
+  background:#f1eee4;
+  border:1px solid #cfcdbb;
+  box-shadow:0 5px 24px #30291e2b;
+}
+.story-header{
+  flex-shrink:0;
+  padding:15px 17px 12px;
+  border-bottom:1px solid #cfcdbb;
+}
 .story-tools{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
 .kicker{color:#762f42;font:bold 10px Arial,sans-serif;letter-spacing:2px;text-transform:uppercase}
 .tool-buttons button{width:29px;height:29px;border:1px solid #cfcdbb;background:#fffdf7}
 .story-title{margin:0;font-size:clamp(23px,4vw,31px);font-weight:normal;line-height:1.15}
 .story-creative{margin-top:7px;color:#294d3b;font-size:15px;font-style:italic}
-.story-scroll{max-height:calc(75vh - 150px);overflow:auto;padding:15px 17px}
+.story-scroll{
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  padding:15px 17px;
+  max-height:none;
+}
 .story-scroll p{margin:0 0 13px;font-size:15px;line-height:1.68}
 .story-location{margin-top:15px;padding-top:11px;border-top:1px solid #cfcdbb;color:#696f65;font:11px/1.5 Arial,sans-serif}
-.story-footer{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 12px;background:#e2e7dc;border-top:1px solid #cfcdbb}
+.story-footer{
+  flex-shrink:0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  padding:10px 12px;
+  background:#e2e7dc;
+  border-top:1px solid #cfcdbb;
+}
 .story-count{color:#696f65;font:11px Arial,sans-serif}
 .story-nav{display:flex;gap:5px}
 .story-nav button{padding:8px;border:1px solid #c8bba8;background:#fffdf7;font:11px Arial,sans-serif}
+
 .map-number{display:grid;place-items:center;width:29px;height:29px;border:2px solid #f1eee4;border-radius:50%;background:#762f42;color:white;box-shadow:0 2px 7px #1f1b1740;font:bold 11px Arial,sans-serif;position:relative}
 .map-number.start{width:37px;height:37px;background:#294d3b;font-size:10px}
 .map-number.architecture{border-radius:5px;background:#94734f}
@@ -116,6 +152,7 @@ button:focus-visible{outline:3px solid #a06a36;outline-offset:3px}
 .gp-count{margin:5px 0;color:#696f65;font:11px Arial,sans-serif}
 .gp-board.gp-breaking .gp-tile{animation:gpBreak .55s ease both}
 @keyframes gpBreak{0%{transform:scale(1);opacity:1}45%{transform:translateY(-6px) rotate(2deg) scale(.88);opacity:.65}100%{transform:translateY(0) rotate(0) scale(1);opacity:1}}
+
 @media(max-width:760px){
 .topbar{align-items:flex-start;flex-direction:column}
 .top-actions{width:100%;justify-content:flex-start}
@@ -130,8 +167,15 @@ button:focus-visible{outline:3px solid #a06a36;outline-offset:3px}
 .top-actions button.route-mode{padding:7px}
 .top-actions button.route-mode.active{padding:6px}
 .map-layout{height:calc(100vh - 105px)}
-.story-card{right:7px;bottom:7px;width:calc(100vw - 14px);max-height:67%}
-.story-scroll{max-height:calc(67vh - 145px)}
+.story-card{
+  right:7px;
+  top:7px;
+  bottom:7px;
+  width:calc(100vw - 14px);
+}
+.story-scroll{
+  max-height:none;
+}
 .route-panel{left:7px;top:7px;bottom:7px}
 }
 @media(max-width:480px){
@@ -214,7 +258,7 @@ const stops=[
 {name:"Willa Kahana",creative:"Dom doktora",category:"Architektura",coords:[52.105629,21.284504],location:"ul. Marii Konopnickiej 7 i 7a, Otwock",imageUrl:"https://commons.wikimedia.org/wiki/Special:FilePath/Willa_Kahana,_ul._Marii_Konopnickiej_7_i_7a.jpg",page:"https://commons.wikimedia.org/wiki/File:Willa_Kahana,_ul._Marii_Konopnickiej_7_i_7a.jpg",alt:"Willa Kahana przy ulicy Marii Konopnickiej",caption:"Willa Kahana przy ul. Marii Konopnickiej",p:["W 1910 roku przy dzisiejszej ulicy Konopnickiej powstała Willa Nowość. Kilkanaście lat później obok niej wybudowano drugi dom dla rodziny Kahanów. Mieszkał tu doktor Mieczysław Kahan, który prowadził praktykę lekarską, a w jednym z budynków działał również pensjonat. Oba domy można zobaczyć w filmie Pora umierać z Danutą Szaflarską, nakręconym w 2007 roku."]},
 {name:"Willa Podole",creative:"Dawny adres zdrowia",category:"Architektura",coords:[52.110241,21.268685],location:"ul. Kościuszki 15, Otwock",imageUrl:"https://otwock.pl/images_beforeafter/Willa_Podole_Kosciuszki_po.jpg",page:"https://otwock.pl/otwock-kiedys-i-dzis",alt:"Willa Podole przy ulicy Kościuszki",caption:"Willa Podole przy ul. Kościuszki",p:["W 1895 roku Franciszek Podolski, farmaceuta, wybudował willę, w której otworzył aptekę. Oprócz leków sprzedawano tu wody mineralne i różne środki lecznicze. Można było nawet zamówić dezynfekcję pomieszczeń specjalnym aparatem. Podczas II wojny światowej apteka służyła także jako punkt kontaktowy konspiracji i miejsce dystrybucji podziemnej prasy. Działała aż do 1994 roku."]},
 {name:"Willa Wajnbergów",creative:"Drewniana elegancja",category:"Architektura",coords:[52.0999,21.2574],location:"ul. Świerkowa 16, Otwock",imageUrl:"https://iotwock.info/static/files/gallery/81/1663727_1736786761.webp",page:"https://iotwock.info/artykul/nowy-otwocki-swidermajer-n1663727",alt:"Willa Wajnbergów przy ulicy Świerkowej",caption:"Willa Wajnbergów przy ul. Świerkowej 16",p:["W 1928 roku na terenie dawnej posesji Willi Glinianka powstał pensjonat Wajnbergów. Przyjeżdżali tu goście, którzy spędzali w Otwocku dłuższy czas, korzystając z lokalnych pensjonatów i sanatoriów. W budynku zachowały się między innymi drewniana klatka schodowa, oryginalne drzwi i ceramiczne piece. W styczniu 2025 roku willę wpisano do rejestru zabytków."]},
-{name:"Brzegi Michała Elwiro Andriollego",creative:"Nad wodą, wśród wspomnień",category:"Historia",coords:[52.0878,21.3030],location:"Dawna posiadłość Brzegi nad Świdrem",imageUrl:"https://archiwum.otwock.pl/zdjecia/historia/andriol.jpg",page:"https://archiwum.otwock.pl/default.asp?ID=33&w=2",alt:"Dom nazwany „Mój” Andriollego, z jego sylwetką na ganku",caption:"Dom nazwany „Mój” Andriollego, z jego sylwetką na ganku",p:["Michał Elwiro Andriolli był rysownikiem i ilustratorem, ale jego związek z okolicą Otwocka nie ograniczał się do pracy artystycznej. W 1880 roku kupił nad Świdrem posiadłość, którą nazwał Brzegami. Zamieszkał tam i postanowił stworzyć miejsce, do którego mogliby przyjeżdżać letnicy z Warszawy.","Na terenie posiadłości powstały drewniane wille przeznaczone na wynajem. Miały charakterystyczne werandy, ozdobne wykończenia i wiele detali, które wyróżniały je spośród zwykłych domów. Andriolli zadbał o to, by budynki pasowały do otaczającej je przyrody. Jego pomysł szybko znalazł naśladowców, a podobna architektura zaczęła pojawiać się w kolejnych miejscowościach nad Świdrem."],fact:{title:"Ciekawostka",text:"Andriolli miał również plany związane z przyszłością Brzegów. Chciał, aby po jego śmierci powstało tam sanatorium przeznaczone dla osób niezamożnych, przede wszystkim dla dzieci. Pomysł ten miał szansę zostać zrealizowany dzięki staraniom doktora Henryka Dobrzyckiego, jednak zabrakło pieniędzy na jego wykonanie. Ostatecznie sanatorium nigdy nie powstało."}},
+{name:"Brzegi Michała Elwiro Andriollego",creative:"Nad wodą, wśród wspomnień",category:"Historia",coords:[52.0878,21.3030],location:"Dawna posiadłość Brzegi nad Świdrem",imageUrl:"https://archiwum.otwock.pl/zdjecia/historia/andriol.jpg",page:"https://archiwum.otwock.pl/default.asp?ID=33&w=2",alt:"Dom Andriollego nazwany „Mój” z jego sylwetką na ganku",caption:"Dom nazwany „Mój” Andriollego, z jego sylwetką na ganku",p:["Michał Elwiro Andriolli był rysownikiem i ilustratorem, ale jego związek z okolicą Otwocka nie ograniczał się do pracy artystycznej. W 1880 roku kupił nad Świdrem posiadłość, którą nazwał Brzegami. Zamieszkał tam i postanowił stworzyć miejsce, do którego mogliby przyjeżdżać letnicy z Warszawy.","Na terenie posiadłości powstały drewniane wille przeznaczone na wynajem. Miały charakterystyczne werandy, ozdobne wykończenia i wiele detali, które wyróżniały je spośród zwykłych domów. Andriolli zadbał o to, by budynki pasowały do otaczającej je przyrody. Jego pomysł szybko znalazł naśladowców, a podobna architektura zaczęła pojawiać się w kolejnych miejscowościach nad Świdrem."],fact:{title:"Ciekawostka",text:"Andriolli miał również plany związane z przyszłością Brzegów. Chciał, aby po jego śmierci powstało tam sanatorium przeznaczone dla osób niezamożnych, przede wszystkim dla dzieci. Pomysł ten miał szansę zostać zrealizowany dzięki staraniom doktora Henryka Dobrzyckiego, jednak zabrakło pieniędzy na jego wykonanie. Ostatecznie sanatorium nigdy nie powstało."}},
 {name:"Rzeka Świder",creative:"Nurt własną drogą",category:"Odpoczynek",coords:[52.14380210131452,21.272551484254087],location:"Dolina rzeki Świder",image:"Świder_river_-_panoramio.jpg",page:"https://commons.wikimedia.org/wiki/Category:Otwock",alt:"Rzeka Świder",caption:"Rzeka Świder",p:["Rzeka Świder ma za sobą długą historię, a jej okolice były zamieszkane na długo przed powstaniem Otwocka. Już w 1405 roku w dokumentach pojawiła się nazwa Świder, odnosząca się do dawnej osady. Przez kolejne stulecia rzeka i jej okolice stanowiły ważną część życia lokalnej społeczności. Z czasem stały się również miejscem, które przyciągało coraz więcej przyjezdnych.","W XIX wieku Świder zaczął odgrywać coraz większą rolę w rozwoju okolicznych miejscowości. Jego piaszczyste brzegi, zakola i otaczające je lasy przyciągały mieszkańców Warszawy szukających wypoczynku. W okresie międzywojennym nad Świdrem działały plaże i przystanie, a rzeka stała się jednym z charakterystycznych miejsc letniego wypoczynku.","Po II wojnie światowej znaczenie Świdra jako miejsca rekreacji zmalało, między innymi z powodu pogarszającej się jakości i objętości wody. W 1978 roku utworzono rezerwat przyrody „Świder”, obejmujący 41 kilometrów rzeki oraz fragment doliny rzeki Mieni."]},
 {name:"Zofiówka",creative:"Własny świat",category:"Historia",coords:[52.114890,21.288220],location:"ul. Kochanowskiego 10, Otwock",imageUrl:"https://static2.przegladotwocki.pl/data/articles/xl-zofiowka-rok-1938-1675343059-full.jpg",page:"https://www.przegladotwocki.pl/artykul/421,zofiowka-rok-1938",alt:"Budynek sanatorium Zofiówka w 1938 roku",caption:"Zofiówka w 1938 roku",p:["Historia Zofiówki rozpoczęła się w 1906 roku, kiedy grupa lekarzy i społeczników założyła Towarzystwo Opieki nad Ubogimi Nerwowo i Umysłowo Chorymi Żydami. Dwa lata później w Otwocku otwarto pierwszy pawilon zakładu. Zakup rozległego terenu był możliwy dzięki Zofii Endelman, która przekazała na ten cel swoją biżuterię. Pierwszym kierownikiem placówki został doktor Samuel Goldflam, znany warszawski neurolog. Zofiówka przyjmowała przede wszystkim osoby niezamożne, a wielu pacjentów leczono bezpłatnie.","Podczas II wojny światowej Zofiówka znalazła się na terenie getta uzdrowiskowego. 19 sierpnia 1942 roku, podczas jego likwidacji, niemieccy okupanci zamordowali 108 pacjentów i trzech lekarzy. Z czasem placówka przestała funkcjonować, a jej zabudowania zaczęły niszczeć. Dziś miejsce to przypomina o ważnej części historii Otwocka i jego dawnych mieszkańcach."]},
 {name:"Mały Biskupin",creative:"Królestwo z gałęzi",category:"Odpoczynek",coords:[52.0983,21.2648],location:"Las przy ul. Karczewskiej, Otwock",imageUrl:"https://static2.przegladotwocki.pl/data/articles/xl-sekretny-zakatek-w-otwocku-maly-biskupin-miejsce-na-rodzinny-wypad-foto-1695399280.jpg",page:"https://static2.przegladotwocki.pl/data/articles/xl-sekretny-zakatek-w-otwocku-maly-biskupin-miejsce-na-rodzinny-wypad-foto-1695399280.jpg",alt:"Drewniana osada Mały Biskupin widziana z przodu",caption:"Mały Biskupin w otwockim lesie",p:["Mały Biskupin to drewniana osada położona w otwockim lesie. Jej nazwa nawiązuje do słynnego grodu w Biskupinie. Powstała z inicjatywy mieszkańca, który zaczął od budowy niewielkiego szałasu, a z czasem rozbudował go w większą konstrukcję. Z biegiem lat pojawiały się kolejne budowle, przejścia i miejsca do odpoczynku.","Inspiracją do dalszej rozbudowy były między innymi własne pomysły twórcy oraz konstrukcje znane z różnych miejsc i filmów. Wśród drewnianych budowli znalazły się także elementy nawiązujące do statku Titanic. Osada jest stale rozwijana, a jej wygląd zmienia się wraz z kolejnymi pomysłami."]},
@@ -677,7 +721,7 @@ loc.textContent="Miejsce: "+s.location;
 c.append(loc);
 }
 document.getElementById("story-count").textContent=(routeStopOrder.indexOf(i)+1)+" / "+stops.length;
-document.getElementById("story-card").style.display="block";
+document.getElementById("story-card").style.display="flex";
 document.querySelectorAll(".stop").forEach((b,j)=>b.classList.toggle("active",routeStopOrder[j]===i));
 closeRoutePanel();
 map.flyTo(s.coords,Math.max(map.getZoom(),15),{duration:.65});
