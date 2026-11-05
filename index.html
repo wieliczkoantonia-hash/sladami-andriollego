@@ -125,49 +125,11 @@ button:focus-visible{outline:3px solid #a06a36;outline-offset:3px}
 .gp-count{margin:5px 0;color:#696f65;font:11px Arial,sans-serif}
 .gp-board.gp-breaking .gp-tile{animation:gpBreak .55s ease both}
 @keyframes gpBreak{0%{transform:scale(1);opacity:1}45%{transform:translateY(-6px) rotate(2deg) scale(.88);opacity:.65}100%{transform:translateY(0) rotate(0) scale(1);opacity:1}}
-@media(max-width:760px){
-.topbar{align-items:flex-start;flex-direction:column}
-.top-actions{width:100%;justify-content:flex-start}
-.top-actions button.route-mode{flex:0 0 42px;min-width:42px}
-.map-layout{height:auto;min-height:0}
-}
-@media(max-width:650px){
-.legend-toggle{display:block}
-.map-layout .legend-control{display:none}
-.map-layout.legend-open .legend-control{display:block}
-.topbar{padding:9px}
-.brand{font-size:14px}
-.brand small{font-size:9px}
-.top-actions button{padding:8px;font-size:10px}
-.top-actions button.route-mode{padding:7px}
-.top-actions button.route-mode.active{padding:6px}
-.map-layout{height:auto;min-height:0}
-.story-card{right:7px;bottom:7px;left:7px;width:auto;height:76%;max-height:calc(100% - 14px);min-height:0;display:none;flex-direction:column}
-.story-header{flex:0 0 auto;min-height:0;padding:11px 13px 9px}
-.story-title{font-size:25px}
-.story-creative{font-size:14px}
-.story-scroll{flex:1 1 0%;height:0;min-height:0;max-height:none;overflow-y:auto;overflow-x:hidden;touch-action:pan-y;-webkit-overflow-scrolling:touch;padding:12px 13px}
-.story-scroll p{font-size:14px;line-height:1.6}
-.story-footer{flex:0 0 auto;min-height:50px;padding:8px;gap:5px}
-.story-count{font-size:10px}
-.story-nav{gap:4px}
-.story-nav button{padding:8px 7px;font-size:10px;min-height:34px}
-.route-panel{left:7px;top:7px;bottom:7px}
-.stop-photo img{max-height:220px;height:auto;object-fit:contain}
-.comparison-grid img{max-height:220px;height:auto;object-fit:contain}
-}
-@media(max-width:380px){
-.story-count{font-size:9px}
-.story-nav button{padding:7px 5px;font-size:9px}
-.story-footer{gap:3px}
-}
-@media(max-width:480px){
-.comparison-grid{grid-template-columns:1fr}
-.route-mode svg{width:21px;height:21px;flex-basis:21px}
-}
-@media(prefers-reduced-motion:reduce){
-*,*:before,*:after{transition-duration:.01ms!important;animation-duration:.01ms!important}
-}
+@media(max-width:760px){.topbar{align-items:flex-start;flex-direction:column}.top-actions{width:100%;justify-content:flex-start}.top-actions button.route-mode{flex:0 0 42px;min-width:42px}.map-layout{height:auto;min-height:0}}
+@media(max-width:650px){.legend-toggle{display:block}.map-layout .legend-control{display:none}.map-layout.legend-open .legend-control{display:block}.topbar{padding:9px}.brand{font-size:14px}.brand small{font-size:9px}.top-actions button{padding:8px;font-size:10px}.top-actions button.route-mode{padding:7px}.top-actions button.route-mode.active{padding:6px}.map-layout{height:auto;min-height:0}.story-card{right:7px;bottom:7px;left:7px;width:auto;height:76%;max-height:calc(100% - 14px);min-height:0;display:none;flex-direction:column}.story-header{flex:0 0 auto;min-height:0;padding:11px 13px 9px}.story-title{font-size:25px}.story-creative{font-size:14px}.story-scroll{flex:1 1 0%;height:0;min-height:0;max-height:none;overflow-y:auto;overflow-x:hidden;touch-action:pan-y;-webkit-overflow-scrolling:touch;padding:12px 13px}.story-scroll p{font-size:14px;line-height:1.6}.story-footer{flex:0 0 auto;min-height:50px;padding:8px;gap:5px}.story-count{font-size:10px}.story-nav{gap:4px}.story-nav button{padding:8px 7px;font-size:10px;min-height:34px}.route-panel{left:7px;top:7px;bottom:7px}.stop-photo img{max-height:220px;height:auto;object-fit:contain}.comparison-grid img{max-height:220px;height:auto;object-fit:contain}}
+@media(max-width:380px){.story-count{font-size:9px}.story-nav button{padding:7px 5px;font-size:9px}.story-footer{gap:3px}}
+@media(max-width:480px){.comparison-grid{grid-template-columns:1fr}.route-mode svg{width:21px;height:21px;flex-basis:21px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition-duration:.01ms!important;animation-duration:.01ms!important}}
 #route-finish{position:absolute;z-index:1200;inset:0;display:none;place-items:center;padding:18px;background:#202a24a8}
 #route-finish.visible{display:grid}
 .finish-card{width:min(470px,100%);max-height:calc(100% - 20px);overflow:auto;background:#f1eee4;border:1px solid #cfcdbb;box-shadow:0 12px 40px #0004;text-align:center;padding:clamp(20px,5vw,34px)}
@@ -189,9 +151,7 @@ button:focus-visible{outline:3px solid #a06a36;outline-offset:3px}
 <path d="M32 75 72 88 112 75M20 111 72 124 124 111M12 145 72 157 132 145" fill="none" stroke="#849178" stroke-width="1.5"/>
 </svg>
 <h1>Śladami Andriollego</h1>
-<div class="cover-photo">
-<img src="https://commons.wikimedia.org/wiki/Special:FilePath/Andriolli_Whence_return_Lithuanians.jpg" alt="Ilustracja Michała Elwiro Andriollego do Konrada Wallenroda">
-</div>
+<div class="cover-photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Andriolli_Whence_return_Lithuanians.jpg" alt="Ilustracja Michała Elwiro Andriollego do Konrada Wallenroda"></div>
 <p class="cover-credit">Ilustracja Michała Elwiro Andriollego, <em>Skąd Litwini wracali?</em> · <a href="https://commons.wikimedia.org/wiki/File:Andriolli_Whence_return_Lithuanians.jpg" target="_blank" rel="noopener noreferrer">źródło</a></p>
 <button class="primary" onclick="enterMap()">Otwórz mapę</button>
 </div>
@@ -216,29 +176,17 @@ button:focus-visible{outline:3px solid #a06a36;outline-offset:3px}
 <div id="map" aria-label="Interaktywna mapa Otwocka"></div>
 <div id="route-status" role="status" aria-live="polite"></div>
 <aside id="route-panel" class="route-panel">
-<div class="panel-header">
-<div><h2>Punkty na mapie</h2><p>Wybierz miejsce</p></div>
-<button class="close-button" onclick="closeRoutePanel()" aria-label="Zamknij panel">×</button>
-</div>
+<div class="panel-header"><div><h2>Punkty na mapie</h2><p>Wybierz miejsce</p></div><button class="close-button" onclick="closeRoutePanel()" aria-label="Zamknij panel">×</button></div>
 <div id="stop-list"></div>
 </aside>
 <article id="story-card" class="story-card">
 <header class="story-header">
-<div class="story-tools">
-<span id="story-kicker" class="kicker"></span>
-<div class="tool-buttons"><button onclick="closeStory()" aria-label="Zamknij">×</button></div>
-</div>
+<div class="story-tools"><span id="story-kicker" class="kicker"></span><div class="tool-buttons"><button onclick="closeStory()" aria-label="Zamknij">×</button></div></div>
 <h2 id="story-title" class="story-title"></h2>
 <div id="story-creative" class="story-creative"></div>
 </header>
 <div id="story-content" class="story-scroll"></div>
-<footer class="story-footer">
-<span id="story-count" class="story-count"></span>
-<div class="story-nav">
-<button onclick="previousStop()">← Poprzedni</button>
-<button onclick="nextStop()">Następny →</button>
-</div>
-</footer>
+<footer class="story-footer"><span id="story-count" class="story-count"></span><div class="story-nav"><button onclick="previousStop()">← Poprzedni</button><button onclick="nextStop()">Następny →</button></div></footer>
 </article>
 <div id="route-finish">
 <div class="finish-card">
@@ -246,10 +194,7 @@ button:focus-visible{outline:3px solid #a06a36;outline-offset:3px}
 <h2>Otwock poznany?</h2>
 <p>Udało Ci się odwiedzić wszystkie miejsca. Teraz możesz sprawdzić, ile historii zostało w pamięci.</p>
 <img class="finish-qr" id="finish-qr" alt="Kod QR prowadzący do quizu o Otwocku">
-<div class="finish-actions">
-<a href="https://wieliczkoantonia-hash.github.io/sladami-andriollego-quizz/">Przejdź do quizu</a>
-<button class="secondary" onclick="closeRouteFinish()">Wróć do mapy</button>
-</div>
+<div class="finish-actions"><a href="https://wieliczkoantonia-hash.github.io/sladami-andriollego-quizz/">Przejdź do quizu</a><button class="secondary" onclick="closeRouteFinish()">Wróć do mapy</button></div>
 </div>
 </div>
 </main>
@@ -273,6 +218,7 @@ const stops=[
 let map,routeLine,routeOutline,markerLayer,currentIndex=0,routeRequestId=0,activeRouteMode=null;
 let routeStopOrder=stops.map((_,i)=>i);
 let routeAnimationFrame=null;
+let routeGeometry=null;
 const center=[52.108,21.276];
 const MAP_BOUNDS=L.latLngBounds([52.075,21.238],[52.158,21.322]);
 function enterMap(){
@@ -362,16 +308,37 @@ function closeRoutePanel(){
 document.getElementById("route-panel").classList.remove("open");
 document.querySelector(".map-layout").classList.remove("panel-open");
 }
+function setRouteStatus(message,visible=true){
+const status=document.getElementById("route-status");
+status.textContent=message;
+status.style.display=visible?"block":"none";
+}
+function setRouteButtonsDisabled(disabled){
+document.getElementById("walk-route-btn").disabled=disabled;
+document.getElementById("car-route-btn").disabled=disabled;
+}
+function clearRoute(){
+if(routeLine&&map)map.removeLayer(routeLine);
+if(routeOutline&&map)map.removeLayer(routeOutline);
+routeLine=null;
+routeOutline=null;
+routeGeometry=null;
+if(routeAnimationFrame){
+cancelAnimationFrame(routeAnimationFrame);
+routeAnimationFrame=null;
+}
+}
 function showRoute(mode){
 if(activeRouteMode===mode){
 activeRouteMode=null;
+routeRequestId++;
+setRouteButtonsDisabled(false);
 document.getElementById("walk-route-btn").classList.remove("active");
 document.getElementById("car-route-btn").classList.remove("active");
 document.getElementById("walk-route-btn").setAttribute("aria-pressed","false");
 document.getElementById("car-route-btn").setAttribute("aria-pressed","false");
-if(routeLine)map.removeLayer(routeLine);
-if(routeOutline)map.removeLayer(routeOutline);
-if(routeAnimationFrame)cancelAnimationFrame(routeAnimationFrame);
+clearRoute();
+setRouteStatus("",false);
 return;
 }
 activeRouteMode=mode;
@@ -381,11 +348,112 @@ document.getElementById("walk-route-btn").setAttribute("aria-pressed",String(mod
 document.getElementById("car-route-btn").setAttribute("aria-pressed",String(mode==="car"));
 drawRoute(mode);
 }
-function drawRoute(mode){
-const coords=routeStopOrder.map(i=>stops[i].coords);
-if(routeLine)map.removeLayer(routeLine);
-if(routeOutline)map.removeLayer(routeOutline);
-animateRoute(coords,mode);
+function getRouteCost(order,matrix){
+let total=0;
+for(let i=1;i<order.length;i++){
+const distance=matrix[order[i-1]][order[i]];
+if(!Number.isFinite(distance))return Infinity;
+total+=distance;
+}
+return total;
+}
+function optimizeRouteOrder(matrix){
+const count=stops.length;
+const start=0;
+const finish=8;
+const remaining=new Set(Array.from({length:count},(_,i)=>i).filter(i=>i!==start&&i!==finish));
+const order=[start];
+let current=start;
+while(remaining.size){
+let nearest=null;
+let nearestDistance=Infinity;
+for(const candidate of remaining){
+const distance=matrix[current][candidate];
+if(Number.isFinite(distance)&&distance<nearestDistance){
+nearestDistance=distance;
+nearest=candidate;
+}
+}
+if(nearest===null)throw new Error("Nie można połączyć wszystkich punktów trasą.");
+order.push(nearest);
+remaining.delete(nearest);
+current=nearest;
+}
+order.push(finish);
+let improved=true;
+let passes=0;
+while(improved&&passes<100){
+improved=false;
+passes++;
+let bestCost=getRouteCost(order,matrix);
+for(let i=1;i<order.length-2;i++){
+for(let j=i+1;j<order.length-1;j++){
+const candidate=order.slice();
+const reversed=candidate.slice(i,j+1).reverse();
+candidate.splice(i,j-i+1,...reversed);
+const cost=getRouteCost(candidate,matrix);
+if(cost+0.5<bestCost){
+order.splice(0,order.length,...candidate);
+bestCost=cost;
+improved=true;
+}
+}
+}
+}
+return order;
+}
+async function drawRoute(mode){
+const requestId=++routeRequestId;
+clearRoute();
+setRouteButtonsDisabled(true);
+setRouteStatus(mode==="foot"?"Obliczanie optymalnej ttrasy pieszo…":"Obliczanie optymalnej trasy samochodem…");
+const controller=new AbortController();
+const timeout=setTimeout(()=>controller.abort(),30000);
+try{
+const coordinates=stops.map(stop=>stop.coords[1]+","+stop.coords[0]).join(";");
+const service=mode==="foot"?"https://routing.openstreetmap.de/routed-foot/":"https://routing.openstreetmap.de/routed-car/";
+const tableUrl=service+"table/v1/driving/"+coordinates+"?annotations=distance,duration";
+const tableResponse=await fetch(tableUrl,{signal:controller.signal});
+if(!tableResponse.ok)throw new Error("Nie udało się pobrać odległości między punktami.");
+const tableData=await tableResponse.json();
+if(requestId!==routeRequestId)return;
+if(tableData.code!=="Ok"||!Array.isArray(tableData.distances)||tableData.distances.length!==stops.length)throw new Error("Serwer nie zwrócił pełnej tabeli odległości.");
+const order=optimizeRouteOrder(tableData.distances);
+if(order.length!==stops.length||new Set(order).size!==stops.length||order[0]!==0||order[order.length-1]!==8)throw new Error("Nie udało się ustalić prawidłowej kolejności punktów.");
+const orderedCoordinates=order.map(index=>stops[index].coords[1]+","+stops[index].coords[0]).join(";");
+setRouteStatus("Punkty uporządkowane. Wyznaczanie przebiegu trasy…");
+const routeUrl=service+"route/v1/driving/"+orderedCoordinates+"?overview=full&geometries=geojson&steps=false";
+const routeResponse=await fetch(routeUrl,{signal:controller.signal});
+if(!routeResponse.ok)throw new Error("Nie udało się pobrać przebiegu trasy.");
+const routeData=await routeResponse.json();
+if(requestId!==routeRequestId)return;
+if(routeData.code!=="Ok"||!routeData.routes||!routeData.routes.length)throw new Error("Serwer nie zwrócił przebiegu trasy.");
+const route=routeData.routes[0];
+if(!route.geometry||!Array.isArray(route.geometry.coordinates)||!Number.isFinite(route.duration)||!Number.isFinite(route.distance))throw new Error("Serwer nie zwrócił pełnych danych trasy.");
+routeStopOrder=order;
+buildList();
+drawMarkers();
+routeGeometry=route.geometry.coordinates.map(point=>[point[1],point[0]]);
+const distance=(route.distance/1000).toFixed(1);
+const minutes=Math.round(route.duration/60);
+const hours=Math.floor(minutes/60);
+const remainingMinutes=minutes%60;
+const durationText=hours>0?hours+" godz. "+remainingMinutes+" min":minutes+" min";
+setRouteStatus((mode==="foot"?"Trasa piesza":"Trasa samochodowa")+" - " + " ok " +distance+" km + "+durationText,true);
+animateRoute(routeGeometry,mode);
+fitRoute();
+}catch(error){
+if(requestId!==routeRequestId)return;
+console.error("Błąd wyznaczania trasy:",error);
+if(error.name==="AbortError"){
+setRouteStatus("Serwer nie odpowiedział w ciągu 30 sekund. Spróbuj ponownie.",true);
+}else{
+setRouteStatus("Nie udało się obliczyć trasy. Sprawdź połączenie i spróbuj ponownie.",true);
+}
+}finally{
+clearTimeout(timeout);
+if(requestId===routeRequestId)setRouteButtonsDisabled(false);
+}
 }
 function animateRoute(coords,mode){
 if(routeAnimationFrame)cancelAnimationFrame(routeAnimationFrame);
@@ -394,32 +462,51 @@ if(routeOutline)map.removeLayer(routeOutline);
 const color=mode==="foot"?"#762f42":"#536b78";
 routeOutline=L.polyline([],{color:"#fffdf7",weight:9,opacity:.9,lineCap:"round",lineJoin:"round"}).addTo(map);
 routeLine=L.polyline([],{color,weight:5,opacity:.95,lineCap:"round",lineJoin:"round",dashArray:mode==="foot"?"":"10 8"}).addTo(map);
-let segment=0,progress=0,last=0;
-const duration=700;
-function frame(time){
-if(!last)last=time;
-const delta=Math.min(time-last,40);
-last=time;
-progress+=delta/duration;
-if(progress>=1){segment++;progress=0}
-if(segment>=coords.length-1){
-routeLine.setLatLngs(coords);
-routeOutline.setLatLngs(coords);
-routeAnimationFrame=null;
-return;
-}
-const a=L.latLng(coords[segment]),b=L.latLng(coords[segment+1]);
-const current=L.latLng(a.lat+(b.lat-a.lat)*progress,a.lng+(b.lng-a.lng)*progress);
-const points=coords.slice(0,segment+1).concat([[current.lat,current.lng]]);
+const points=coords.map(point=>L.latLng(point));
+const lengths=[0];
+for(let i=1;i<points.length;i++)lengths.push(lengths[i-1]+points[i-1].distanceTo(points[i]));
+const totalLength=lengths[lengths.length-1];
+if(!totalLength){
 routeLine.setLatLngs(points);
 routeOutline.setLatLngs(points);
+return;
+}
+const duration=3000;
+let startTime=null;
+function frame(time){
+if(!startTime)startTime=time;
+const progress=Math.min((time-startTime)/duration,1);
+const targetDistance=totalLength*progress;
+let low=0,high=lengths.length-1;
+while(low<high){
+const middle=Math.floor((low+high)/2);
+if(lengths[middle]<targetDistance)low=middle+1;
+else high=middle;
+}
+const index=Math.max(1,low);
+const previousDistance=lengths[index-1];
+const segmentLength=lengths[index]-previousDistance;
+const segmentProgress=segmentLength===0?0:(targetDistance-previousDistance)/segmentLength;
+const a=points[index-1],b=points[index];
+const current=L.latLng(a.lat+(b.lat-a.lat)*segmentProgress,a.lng+(b.lng-a.lng)*segmentProgress);
+const visiblePoints=points.slice(0,index);
+visiblePoints.push(current);
+routeLine.setLatLngs(visiblePoints);
+routeOutline.setLatLngs(visiblePoints);
+if(progress<1){
 routeAnimationFrame=requestAnimationFrame(frame);
+}else{
+routeLine.setLatLngs(points);
+routeOutline.setLatLngs(points);
+routeAnimationFrame=null;
+}
 }
 routeAnimationFrame=requestAnimationFrame(frame);
 }
 function fitRoute(){
 if(!map)return;
-map.fitBounds(L.latLngBounds(routeStopOrder.map(i=>stops[i].coords)).pad(.12),{animate:true,duration:.6});
+const points=routeGeometry||routeStopOrder.map(i=>stops[i].coords);
+map.fitBounds(L.latLngBounds(points).pad(.12),{animate:true,duration:.6});
 }
 function addImage(c,s){
 let src=s.imageUrl||(s.image?"https://commons.wikimedia.org/wiki/Special:FilePath/"+encodeURIComponent(s.image):"");
