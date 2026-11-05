@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -55,17 +54,17 @@ button:focus-visible{outline:3px solid #a06a36;outline-offset:3px}
 .stop.active .stop-no{background:#762f42;color:white}
 .stop-name{display:block;font-size:14px;line-height:1.3}
 .stop-subtitle{display:block;margin-top:4px;color:#696f65;font:10px/1.4 Arial,sans-serif}
-.story-card{position:absolute;z-index:650;right:12px;bottom:12px;width:min(440px,calc(100vw - 24px));height:min(760px,calc(100% - 24px));max-height:calc(100% - 24px);display:none;flex-direction:column;overflow:hidden;background:#f1eee4;border:1px solid #cfcdbb;box-shadow:0 5px 24px #30291e2b}
-.story-header{flex:0 0 auto;padding:15px 17px 12px;border-bottom:1px solid #cfcdbb}
+.story-card{position:absolute;z-index:650;right:12px;bottom:12px;width:min(440px,calc(100vw - 24px));height:min(760px,calc(100% - 24px));max-height:calc(100% - 24px);min-height:0;display:none;flex-direction:column;overflow:hidden;background:#f1eee4;border:1px solid #cfcdbb;box-shadow:0 5px 24px #30291e2b}
+.story-header{flex:0 0 auto;min-height:0;padding:15px 17px 12px;border-bottom:1px solid #cfcdbb}
 .story-tools{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
 .kicker{color:#762f42;font:bold 10px Arial,sans-serif;letter-spacing:2px;text-transform:uppercase}
 .tool-buttons button{width:29px;height:29px;border:1px solid #cfcdbb;background:#fffdf7}
 .story-title{margin:0;font-size:clamp(23px,4vw,31px);font-weight:normal;line-height:1.15}
 .story-creative{margin-top:7px;color:#294d3b;font-size:15px;font-style:italic}
-.story-scroll{flex:1 1 auto;min-height:0;max-height:none;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:15px 17px}
+.story-scroll{flex:1 1 0%;height:0;min-height:0;max-height:none;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding:15px 17px}
 .story-scroll p{margin:0 0 13px;font-size:15px;line-height:1.68}
 .story-location{margin-top:15px;padding-top:11px;border-top:1px solid #cfcdbb;color:#696f65;font:11px/1.5 Arial,sans-serif}
-.story-footer{flex:0 0 auto;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 12px;background:#e2e7dc;border-top:1px solid #cfcdbb;position:relative;z-index:2}
+.story-footer{flex:0 0 auto;min-height:54px;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 12px;background:#e2e7dc;border-top:1px solid #cfcdbb;position:relative;z-index:2}
 .story-count{color:#696f65;font:11px Arial,sans-serif;white-space:nowrap}
 .story-nav{display:flex;gap:5px;flex-shrink:0}
 .story-nav button{padding:9px 10px;border:1px solid #c8bba8;background:#fffdf7;color:#202a24;font:11px Arial,sans-serif;white-space:nowrap;min-height:35px}
@@ -88,7 +87,7 @@ button:focus-visible{outline:3px solid #a06a36;outline-offset:3px}
 .legend-toggle{display:none;position:absolute;z-index:560;top:9px;left:9px;padding:8px 11px;border:1px solid #cfcdbb;border-radius:3px;background:#fffdf7;color:#202a24;font:11px Arial,sans-serif;box-shadow:0 2px 8px #30291e20}
 .map-layout.panel-open .legend-toggle{display:none}
 .stop-photo{margin:0 0 17px;background:#fffdf7;border:1px solid #cfcdbb}
-.stop-photo img{display:block;width:100%;max-height:270px;min-height:130px;object-fit:cover;background:#e8e4d9}
+.stop-photo img{display:block;width:100%;height:auto;max-height:270px;min-height:0;object-fit:contain;background:#e8e4d9}
 .stop-photo figcaption{padding:8px 10px;color:#696f65;font:10px/1.5 Arial,sans-serif}
 .stop-photo a{color:#762f42;text-decoration:underline}
 .stop-photo.image-unavailable{min-height:75px;display:flex;flex-direction:column;justify-content:center}
@@ -101,7 +100,7 @@ button:focus-visible{outline:3px solid #a06a36;outline-offset:3px}
 .photo-comparison h3{margin:0 0 12px;font-size:17px;font-weight:normal}
 .comparison-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .comparison-grid figure{margin:0;min-width:0}
-.comparison-grid img{width:100%;height:135px;object-fit:cover;background:#e8e4d9}
+.comparison-grid img{display:block;width:100%;height:auto;max-height:260px;object-fit:contain;background:#e8e4d9}
 .comparison-grid figcaption{font:11px/1.5 Arial,sans-serif}
 .comparison-grid figcaption p{margin:5px 0 0}
 .interactive-center{margin:16px 0;padding:13px;background:#fffdf7;border:1px solid #cfcdbb;border-top:3px solid #294d3b}
@@ -143,18 +142,19 @@ button:focus-visible{outline:3px solid #a06a36;outline-offset:3px}
 .top-actions button.route-mode{padding:7px}
 .top-actions button.route-mode.active{padding:6px}
 .map-layout{height:auto;min-height:0}
-.story-card{right:7px;bottom:7px;left:7px;width:auto;height:76%;max-height:calc(100% - 14px)}
-.story-header{padding:11px 13px 9px}
+.story-card{right:7px;bottom:7px;left:7px;width:auto;height:76%;max-height:calc(100% - 14px);min-height:0;display:none;flex-direction:column}
+.story-header{flex:0 0 auto;min-height:0;padding:11px 13px 9px}
 .story-title{font-size:25px}
 .story-creative{font-size:14px}
-.story-scroll{max-height:none;padding:12px 13px}
+.story-scroll{flex:1 1 0%;height:0;min-height:0;max-height:none;overflow-y:auto;overflow-x:hidden;touch-action:pan-y;-webkit-overflow-scrolling:touch;padding:12px 13px}
 .story-scroll p{font-size:14px;line-height:1.6}
-.story-footer{padding:8px;gap:5px}
+.story-footer{flex:0 0 auto;min-height:50px;padding:8px;gap:5px}
 .story-count{font-size:10px}
 .story-nav{gap:4px}
 .story-nav button{padding:8px 7px;font-size:10px;min-height:34px}
 .route-panel{left:7px;top:7px;bottom:7px}
-.stop-photo img{max-height:220px}
+.stop-photo img{max-height:220px;height:auto;object-fit:contain}
+.comparison-grid img{max-height:220px;height:auto;object-fit:contain}
 }
 @media(max-width:380px){
 .story-count{font-size:9px}
