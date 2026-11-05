@@ -32,7 +32,7 @@ button:focus-visible{outline:3px solid #a06a36;outline-offset:3px}
 .top-actions button{border:1px solid #cfcdbb;border-radius:4px;background:#fffdf7;color:#202a24;padding:9px 11px;font:11px Arial,sans-serif}
 .top-actions button.route-mode{display:inline-flex;align-items:center;justify-content:center;width:42px;height:38px;min-width:42px;padding:7px;background:#fffdf7;border:1px solid #c9c6b8;color:#424a43;transition:background .18s,border-color .18s,box-shadow .18s,color .18s}
 .route-mode svg{width:23px;height:23px;flex:0 0 23px;fill:currentColor}
-.top-actions button.route-mode.active{background:#e2e9df;color:#244b35;border:2px solid #294d3b;padding:6px;box-shadow:inset 0 0 0 1px #ffffff}
+.top-actions button.route-mode.active{background:#e2e9df;color:#244b35;border:2px solid #294d3b;padding:6px;box-shadow:inset 0 0 0 1px #fff}
 .top-actions button.route-mode:disabled{opacity:.65;cursor:wait}
 .top-actions button:not(.route-mode):hover{background:#e2e7dc}
 #route-status{position:absolute;z-index:600;top:12px;left:50%;transform:translateX(-50%);max-width:calc(100% - 24px);padding:9px 13px;background:#f1eee4;border:1px solid #cfcdbb;box-shadow:0 2px 8px #30291e20;font:11px/1.4 Arial,sans-serif;display:none;text-align:center}
@@ -52,49 +52,17 @@ button:focus-visible{outline:3px solid #a06a36;outline-offset:3px}
 .stop.active .stop-no{background:#762f42;color:white}
 .stop-name{display:block;font-size:14px;line-height:1.3}
 .stop-subtitle{display:block;margin-top:4px;color:#696f65;font:10px/1.4 Arial,sans-serif}
-.story-card{
-position:absolute;
-z-index:650;
-right:12px;
-top:12px;
-bottom:12px;
-width:min(440px,calc(100vw - 24px));
-display:none;
-flex-direction:column;
-overflow:hidden;
-background:#f1eee4;
-border:1px solid #cfcdbb;
-box-shadow:0 5px 24px #30291e2b;
-}
-story-header{
-flex-shrink:0;
-padding:15px 17px 12px;
-.border-bottom:1px solid #cfcdbb;
-}
+.story-card{position:absolute;z-index:650;right:12px;top:12px;bottom:12px;width:min(440px,calc(100vw - 24px));display:none;flex-direction:column;overflow:hidden;background:#f1eee4;border:1px solid #cfcdbb;box-shadow:0 5px 24px #30291e2b}
+.story-header{flex-shrink:0;padding:15px 17px 12px;border-bottom:1px solid #cfcdbb}
 .story-tools{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
 .kicker{color:#762f42;font:bold 10px Arial,sans-serif;letter-spacing:2px;text-transform:uppercase}
 .tool-buttons button{width:29px;height:29px;border:1px solid #cfcdbb;background:#fffdf7}
 .story-title{margin:0;font-size:clamp(23px,4vw,31px);font-weight:normal;line-height:1.15}
 .story-creative{margin-top:7px;color:#294d3b;font-size:15px;font-style:italic}
-.story-scroll{
-flex:1;
-min-height:0;
-overflow-y:auto;
-padding:15px 17px;
-max-height:none;
-}
+.story-scroll{flex:1;min-height:0;overflow-y:auto;padding:15px 17px;max-height:none}
 .story-scroll p{margin:0 0 13px;font-size:15px;line-height:1.68}
 .story-location{margin-top:15px;padding-top:11px;border-top:1px solid #cfcdbb;color:#696f65;font:11px/1.5 Arial,sans-serif}
-.story-footer{
-flex-shrink:0;
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:8px;
-padding:10px 12px;
-background:#e2e7dc;
-border-top:1px solid #cfcdbb;
-}
+.story-footer{flex-shrink:0;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 12px;background:#e2e7dc;border-top:1px solid #cfcdbb}
 .story-count{color:#696f65;font:11px Arial,sans-serif}
 .story-nav{display:flex;gap:5px}
 .story-nav button{padding:8px;border:1px solid #c8bba8;background:#fffdf7;font:11px Arial,sans-serif}
@@ -149,6 +117,18 @@ border-top:1px solid #cfcdbb;
 .gp-count{margin:5px 0;color:#696f65;font:11px Arial,sans-serif}
 .gp-board.gp-breaking .gp-tile{animation:gpBreak .55s ease both}
 @keyframes gpBreak{0%{transform:scale(1);opacity:1}45%{transform:translateY(-6px) rotate(2deg) scale(.88);opacity:.65}100%{transform:translateY(0) rotate(0) scale(1);opacity:1}}
+
+/* Ekran końcowy */
+#completion-screen{position:fixed;inset:0;z-index:2000;display:none;place-items:center;padding:20px;background:rgba(32,42,36,.72)}
+#completion-screen.show{display:grid}
+.completion-card{position:relative;width:min(560px,100%);max-height:90vh;overflow:auto;padding:35px 25px;text-align:center;background:#f1eee4;border:1px solid #cfcdbb;box-shadow:0 8px 35px #0004}
+.completion-card h2{margin:8px 0 12px;color:#762f42;font-size:clamp(36px,7vw,55px);font-weight:normal;line-height:1.05}
+.completion-card p{font-size:14px;line-height:1.7}
+.completion-qr{display:block;width:190px;height:190px;object-fit:contain;margin:22px auto;padding:8px;background:white;border:1px solid #cfcdbb}
+.completion-close{position:absolute;top:10px;right:10px;width:32px;height:32px;border:1px solid #cfcdbb;background:#fffdf7;font-size:20px}
+.completion-button{display:inline-block;margin-top:10px;padding:13px 19px;background:#762f42;color:white;border:1px solid #762f42;text-decoration:none;font:11px Arial,sans-serif;letter-spacing:1px;text-transform:uppercase}
+.completion-button:hover{background:#294d3b;border-color:#294d3b}
+.completion-small{color:#696f65;font:10px/1.5 Arial,sans-serif!important}
 @media(max-width:760px){
 .topbar{align-items:flex-start;flex-direction:column}
 .top-actions{width:100%;justify-content:flex-start}
@@ -163,20 +143,14 @@ border-top:1px solid #cfcdbb;
 .top-actions button.route-mode{padding:7px}
 .top-actions button.route-mode.active{padding:6px}
 .map-layout{height:calc(100vh - 105px)}
-.story-card{
-right:7px;
-top:7px;
-bottom:7px;
-width:calc(100vw - 14px);
-}
-.story-scroll{
-max-height:none;
-}
+.story-card{right:7px;top:7px;bottom:7px;width:calc(100vw - 14px)}
+.story-scroll{max-height:none}
 .route-panel{left:7px;top:7px;bottom:7px}
 }
 @media(max-width:480px){
 .comparison-grid{grid-template-columns:1fr}
 .route-mode svg{width:21px;height:21px;flex-basis:21px}
+.completion-card{padding:35px 18px}
 }
 @media(prefers-reduced-motion:reduce){
 *,*:before,*:after{transition-duration:.01ms!important;animation-duration:.01ms!important}
@@ -199,6 +173,7 @@ max-height:none;
 <button class="primary" onclick="enterMap()">Otwórz mapę</button>
 </div>
 </section>
+
 <section id="map-page">
 <header class="topbar">
 <div class="brand">Śladami Andriollego<small>Z Androllim po Otwocku</small></div>
@@ -244,8 +219,23 @@ max-height:none;
 </article>
 </main>
 </section>
+
+<div id="completion-screen" role="dialog" aria-modal="true" aria-labelledby="completion-title">
+<div class="completion-card">
+<button class="completion-close" onclick="closeCompletion()" aria-label="Zamknij">×</button>
+<div class="kicker">Koniec trasy</div>
+<h2 id="completion-title">I co, poznajesz już Otwock?</h2>
+<p>Odwiedziłeś wszystkie 12 punktów na mapie i poznałeś ich historie. Ale ile z nich udało Ci się zapamiętać?</p>
+<p>No dobra, sprawdźmy, co zapamiętałeś.</p>
+<img id="quiz-qr" class="completion-qr" alt="Kod QR prowadzący do quizu o Otwocku">
+<p class="completion-small">Zeskanuj kod QR telefonem albo otwórz quiz przyciskiem poniżej.</p>
+<a id="quiz-link" class="completion-button" href="https://wieliczkoantonia-hash.github.io/sladami-andriollego-quizz/" target="_blank" rel="noopener noreferrer">Przejdź do quizu →</a>
+</div>
+</div>
+
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
+const QUIZ_URL="https://wieliczkoantonia-hash.github.io/sladami-andriollego-quizz/";
 const stops=[
 {name:"Dworzec kolejowy",creative:"Pierwszy przystanek",category:"Historia",coords:[52.108540,21.264110],location:"Dworzec kolejowy w Otwocku",image:"19we-otwock001.jpg",page:"https://otwock.pl/historia-otwocka",alt:"Kolej w Otwocku",caption:"Kolej w Otwocku",p:["W 1877 roku do Otwocka dotarła Kolej Nadwiślańska. Od tego momentu droga z Warszawy stała się znacznie łatwiejsza, a miejscowość zaczęła przyciągać coraz więcej letników i kuracjuszy. Wkrótce pojawiły się pensjonaty, sanatoria i drewniane wille, które do dziś przypominają o dawnym charakterze Otwocka.","Trudno dziś wyobrazić sobie rozwój Otwocka bez kolei. Zwykły przyjazd pociągiem stał się początkiem przemiany niewielkiej miejscowości w znane letnisko. Właśnie stąd można ruszyć śladami tamtych zmian i zobaczyć, co po nich pozostało."]},
 {name:"Skwer 7. Pułku Ułanów",creative:"Piasek w środku miasta",category:"Historia",coords:[52.106972,21.264136],location:"Skwer 7. Pułku Ułanów przy ul. Andriollego, Otwock",imageUrl:"https://s30.flog.pl/media/foto_middle/dan-1_930868d6c47d569a012beb58c54b79f0.jpg",page:"https://dan-1.flog.pl/wpis/14527756/strumyk-i-wydmy-w-centrum-miasta-otwocka",alt:"Skwer 7. Pułku Ułanów w Otwocku",caption:"Skwer 7. Pułku Ułanów",p:["Skwer 7. Pułku Ułanów, nazywany przez większość Małpim Gajem, znajduje się w centrum Otwocka. Jego najbardziej charakterystyczną częścią są piaszczyste pagórki przypominające wydmy. Wcześniej w tym miejscu znajdował się sosnowy lasek, a po przebudowie skwer zyskał zupełnie nowy wygląd.","Obecnie można tu znaleźć fontanny, alejki, ławki i trampoliny. Jedną z atrakcji jest wodny plac zabaw, a pagórkowaty teren nadaje temu miejscu charakterystyczny wygląd."]},
@@ -260,11 +250,17 @@ const stops=[
 {name:"Mały Biskupin",creative:"Królestwo z gałęzi",category:"Odpoczynek",coords:[52.0983,21.2648],location:"Las przy ul. Karczewskiej, Otwock",imageUrl:"https://static2.przegladotwocki.pl/data/articles/xl-sekretny-zakatek-w-otwocku-maly-biskupin-miejsce-na-rodzinny-wypad-foto-1695399280.jpg",page:"https://static2.przegladotwocki.pl/data/articles/xl-sekretny-zakatek-w-otwocku-maly-biskupin-miejsce-na-rodzinny-wypad-foto-1695399280.jpg",alt:"Drewniana osada Mały Biskupin widziana z przodu",caption:"Mały Biskupin w otwockim lesie",p:["Mały Biskupin to drewniana osada położona w otwockim lesie. Jej nazwa nawiązuje do słynnego grodu w Biskupinie. Powstała z inicjatywy mieszkańca, który zaczął od budowy niewielkiego szałasu, a z czasem rozbudował go w większą konstrukcję. Z biegiem lat pojawiały się kolejne budowle, przejścia i miejsca do odpoczynku.","Inspiracją do dalszej rozbudowy były między innymi własne pomysły twórcy oraz konstrukcje znane z różnych miejsc i filmów. Wśród drewnianych budowli znalazły się także elementy nawiązujące do statku Titanic. Osada jest stale rozwijana, a jej wygląd zmienia się wraz z kolejnymi pomysłami."]},
 {name:"Pomnik Iskra",creative:"Ostatni lot",category:"Historia",coords:[52.1047,21.2608],location:"Otwock",imageUrl:"https://www.kielceaircollection.eu/wp-content/uploads/2024/10/IS_642p7225_20240930_Otwock_TS-11-Iskra_pomnik-bialo-czerwonej-Iskry-2-973x649.jpg",page:"https://www.kielceaircollection.eu/2024/10/04/otwock-pomnik-bialo-czerwonej-iskry/",alt:"Pomnik samolotu TS-11 Biało-Czerwona Iskra w Otwocku",caption:"Pomnik Biało-Czerwonej Iskry, fot. Kielce Air Collection, 2024",p:["Przez wiele lat charakterystycznym elementem tego miasta był myśliwiec Lim-6, ustawiony przy skrzyżowaniu ulic Andriollego i Hożej. Stał tam przez około 30 lat i stał się dobrze rozpoznawalnym punktem. Po jego usunięciu w 2000 roku pomysł przywrócenia samolotu do przestrzeni miasta powrócił po latach.","W 2022 roku sprowadzono do Otwocka szkolno-treningowy samolot TS-11 Iskra. Ustawiono go na górce przy ulicy Armii Krajowej, nadając temu miejscu nowe znaczenie. Pomnik upamiętnia dwóch pilotów, majora Tomasza Pajórka i majora Mariusza Oliwę, którzy zginęli 11 listopada 1998 roku w katastrofie lotniczej w Otwocku-Soplicowie. Uroczyste odsłonięcie odbyło się 15 sierpnia 2023 roku."]}
 ];
+
 let map,routeLine,routeOutline,markerLayer,currentIndex=0,routeRequestId=0,activeRouteMode=null;
 let routeStopOrder=stops.map((_,i)=>i);
 let routeAnimationFrame=null;
 const center=[52.108,21.276];
 const MAP_BOUNDS=L.latLngBounds([52.075,21.238],[52.158,21.322]);
+
+/* Śledzenie odwiedzonych punktów */
+const visitedStops=new Set();
+let completionShown=false;
+
 function enterMap(){
 document.getElementById("cover").style.display="none";
 document.getElementById("map-page").style.display="block";
@@ -591,12 +587,8 @@ count.className="gp-count";
 count.hidden=true;
 let order=[],selected=null,mistakes=0,finished=false,errorIndex=0;
 const errorMessages=["Nie tym razem. Spróbuj jeszcze raz.","Ten fragment chyba pasuje gdzie indziej.","Przyjrzyj się dokładniej.","Jeszcze nie tak. Spróbuj zamienić inne fragmenty.","Pensjonat nadal jest pomieszany!"];
-function correctCount(){
-return order.filter((piece,index)=>piece===index).length;
-}
-function updateCount(){
-count.textContent="Dobrze ułożone fragmenty: "+correctCount()+"/9";
-}
+function correctCount(){return order.filter((piece,index)=>piece===index).length}
+function updateCount(){count.textContent="Dobrze ułożone fragmenty: "+correctCount()+"/9"}
 function shuffle(){
 order=[0,1,2,3,4,5,6,7,8];
 for(let i=order.length-1;i>0;i--){
@@ -621,28 +613,15 @@ tile.style.backgroundPosition=(x*50)+"% "+(y*50)+"%";
 if(selected===position)tile.classList.add("gp-selected");
 tile.addEventListener("click",()=>{
 if(finished)return;
-if(selected===null){
-selected=position;
-drawBoard();
-return;
-}
-if(selected===position){
-selected=null;
-drawBoard();
-return;
-}
+if(selected===null){selected=position;drawBoard();return}
+if(selected===position){selected=null;drawBoard();return}
 const first=selected;
 const before=correctCount();
 [order[first],order[position]]=[order[position],order[first]];
 selected=null;
 const after=correctCount();
-if(after<=before){
-message.textContent=errorMessages[errorIndex%errorMessages.length];
-errorIndex++;
-mistakes++;
-}else{
-message.textContent="";
-}
+if(after<=before){message.textContent=errorMessages[errorIndex%errorMessages.length];errorIndex++;mistakes++}
+else{message.textContent=""}
 drawBoard();
 if(correctCount()===9){
 finished=true;
@@ -690,9 +669,32 @@ paragraph.textContent=data.text;
 box.append(heading,paragraph);
 c.append(box);
 }
+
+/* Funkcje ekranu końcowego */
+function checkAllStopsVisited(){
+if(visitedStops.size===stops.length&&!completionShown){
+completionShown=true;
+showCompletion();
+}
+}
+function showCompletion(){
+const screen=document.getElementById("completion-screen");
+const qr=document.getElementById("quiz-qr");
+document.getElementById("quiz-link").href=QUIZ_URL;
+qr.src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data="+encodeURIComponent(QUIZ_URL);
+screen.classList.add("show");
+}
+function closeCompletion(){
+document.getElementById("completion-screen").classList.remove("show");
+}
+
 function openStop(i){
 currentIndex=i;
 const s=stops[i];
+
+/* Zapisanie odwiedzonego punktu */
+visitedStops.add(i);
+
 document.getElementById("story-kicker").textContent=s.category?String(routeStopOrder.indexOf(i)+1).padStart(2,"0")+" · "+s.category:"";
 document.getElementById("story-title").textContent=s.name;
 document.getElementById("story-creative").textContent=s.creative||"";
@@ -721,6 +723,9 @@ document.getElementById("story-card").style.display="flex";
 document.querySelectorAll(".stop").forEach((b,j)=>b.classList.toggle("active",routeStopOrder[j]===i));
 closeRoutePanel();
 map.flyTo(s.coords,Math.max(map.getZoom(),15),{duration:.65});
+
+/* Sprawdzenie po otwarciu punktu */
+checkAllStopsVisited();
 }
 function closeStory(){
 document.getElementById("story-card").style.display="none";
