@@ -52,26 +52,24 @@ button:focus-visible{outline:3px solid #a06a36;outline-offset:3px}
 .stop.active .stop-no{background:#762f42;color:white}
 .stop-name{display:block;font-size:14px;line-height:1.3}
 .stop-subtitle{display:block;margin-top:4px;color:#696f65;font:10px/1.4 Arial,sans-serif}
-
-/* POPRAWIONA KARTA OPISU */
 .story-card{
-  position:absolute;
-  z-index:650;
-  right:12px;
-  top:12px;
-  bottom:12px;
-  width:min(440px,calc(100vw - 24px));
-  display:none;
-  flex-direction:column;
-  overflow:hidden;
-  background:#f1eee4;
-  border:1px solid #cfcdbb;
-  box-shadow:0 5px 24px #30291e2b;
+position:absolute;
+z-index:650;
+right:12px;
+top:12px;
+bottom:12px;
+width:min(440px,calc(100vw - 24px));
+display:none;
+flex-direction:column;
+overflow:hidden;
+background:#f1eee4;
+border:1px solid #cfcdbb;
+box-shadow:0 5px 24px #30291e2b;
 }
-.story-header{
-  flex-shrink:0;
-  padding:15px 17px 12px;
-  border-bottom:1px solid #cfcdbb;
+story-header{
+flex-shrink:0;
+padding:15px 17px 12px;
+.border-bottom:1px solid #cfcdbb;
 }
 .story-tools{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
 .kicker{color:#762f42;font:bold 10px Arial,sans-serif;letter-spacing:2px;text-transform:uppercase}
@@ -79,28 +77,27 @@ button:focus-visible{outline:3px solid #a06a36;outline-offset:3px}
 .story-title{margin:0;font-size:clamp(23px,4vw,31px);font-weight:normal;line-height:1.15}
 .story-creative{margin-top:7px;color:#294d3b;font-size:15px;font-style:italic}
 .story-scroll{
-  flex:1;
-  min-height:0;
-  overflow-y:auto;
-  padding:15px 17px;
-  max-height:none;
+flex:1;
+min-height:0;
+overflow-y:auto;
+padding:15px 17px;
+max-height:none;
 }
 .story-scroll p{margin:0 0 13px;font-size:15px;line-height:1.68}
 .story-location{margin-top:15px;padding-top:11px;border-top:1px solid #cfcdbb;color:#696f65;font:11px/1.5 Arial,sans-serif}
 .story-footer{
-  flex-shrink:0;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:8px;
-  padding:10px 12px;
-  background:#e2e7dc;
-  border-top:1px solid #cfcdbb;
+flex-shrink:0;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:8px;
+padding:10px 12px;
+background:#e2e7dc;
+border-top:1px solid #cfcdbb;
 }
 .story-count{color:#696f65;font:11px Arial,sans-serif}
 .story-nav{display:flex;gap:5px}
 .story-nav button{padding:8px;border:1px solid #c8bba8;background:#fffdf7;font:11px Arial,sans-serif}
-
 .map-number{display:grid;place-items:center;width:29px;height:29px;border:2px solid #f1eee4;border-radius:50%;background:#762f42;color:white;box-shadow:0 2px 7px #1f1b1740;font:bold 11px Arial,sans-serif;position:relative}
 .map-number.start{width:37px;height:37px;background:#294d3b;font-size:10px}
 .map-number.architecture{border-radius:5px;background:#94734f}
@@ -152,7 +149,6 @@ button:focus-visible{outline:3px solid #a06a36;outline-offset:3px}
 .gp-count{margin:5px 0;color:#696f65;font:11px Arial,sans-serif}
 .gp-board.gp-breaking .gp-tile{animation:gpBreak .55s ease both}
 @keyframes gpBreak{0%{transform:scale(1);opacity:1}45%{transform:translateY(-6px) rotate(2deg) scale(.88);opacity:.65}100%{transform:translateY(0) rotate(0) scale(1);opacity:1}}
-
 @media(max-width:760px){
 .topbar{align-items:flex-start;flex-direction:column}
 .top-actions{width:100%;justify-content:flex-start}
@@ -168,13 +164,13 @@ button:focus-visible{outline:3px solid #a06a36;outline-offset:3px}
 .top-actions button.route-mode.active{padding:6px}
 .map-layout{height:calc(100vh - 105px)}
 .story-card{
-  right:7px;
-  top:7px;
-  bottom:7px;
-  width:calc(100vw - 14px);
+right:7px;
+top:7px;
+bottom:7px;
+width:calc(100vw - 14px);
 }
 .story-scroll{
-  max-height:none;
+max-height:none;
 }
 .route-panel{left:7px;top:7px;bottom:7px}
 }
