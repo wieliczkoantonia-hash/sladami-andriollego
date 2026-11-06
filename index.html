@@ -195,7 +195,7 @@ button:focus-visible{outline:3px solid #a06a36;outline-offset:3px}
 <div id="map" aria-label="Interaktywna mapa Otwocka"></div>
 <div id="route-status" role="status" aria-live="polite"></div>
 <div id="navigation-status" role="status" aria-live="polite"></div>
-<div id="location-alert" role="alert" aria-live="assertive"><strong>Hej! Tak nie wolno! 😠</strong><p>Nie mogę Ci teraz pokazać właściwej drogi, bo nie udostępniasz swojej lokalizacji. Włącz dostęp do lokalizacji w ustawieniach przeglądarki i odśwież stronę, aby spróbować ponownie!</p></div>
+<div id="location-alert" role="alert" aria-live="assertive"><strong>Hej! Tak nie wolno! 😠</strong><p>Nie mogę Ci teraz pokazać właściwej drogi, ponieważ nie udostępniasz swojej lokalizacji. Zmień uprawnienia lokalizacji dla tej strony w ustawieniach przeglądarki.</p></div>
 <aside id="route-panel" class="route-panel">
 <div class="panel-header"><div><h2>Punkty na mapie</h2><p>Wybierz miejsce</p></div><button class="close-button" onclick="closeRoutePanel()" aria-label="Zamknij panel">×</button></div>
 <div id="stop-list"></div>
@@ -265,9 +265,26 @@ if(!navigator.geolocation){
 showLocationAlert("Ta przeglądarka nie obsługuje funkcji lokalizacji. Otwórz stronę w innej przeglądarce, która obsługuje lokalizację.");
 return;
 }
+const permissionCheck=navigator.permissions&&navigator.permissions.query;
+if(typeof permissionCheck==="function"){
+navigator.permissions.query({name:"geolocation"}).then(permission=>{
+if(permission.state==="denied"){
+locationStarted=false;
+showLocationAlert("Dostęp do lokalizacji jest zablokowany w ustawieniach przeglądarki. Zmień uprawnienia lokalizacji dla tej strony na „Zapytaj” lub „Zezwól”, a następnie odśwież stronę.");
+return;
+}
+watchUserLocation();
+}).catch(()=>{
+watchUserLocation();
+});
+}else{
+watchUserLocation();
+}
+}
+function watchUserLocation(){
+if(locationStarted)return;
 locationStarted=true;
-const alert=document.getElementById("location-alert");
-alert.classList.remove("visible");
+document.getElementById("location-alert").classList.remove("visible");
 locationWatchId=navigator.geolocation.watchPosition(
 position=>{
 console.log("Lokalizacja otrzymana:",position.coords.latitude,position.coords.longitude);
@@ -315,7 +332,11 @@ checkRoutePosition(accuracy);
 function handleLocationError(error){
 if(error.code===1){
 locationStarted=false;
-showLocationAlert("Nie mogę Ci teraz pokazać właściwej drogi, ponieważ nie udostępniasz swojej lokalizacji. Włącz dostęp do lokalizacji w ustawieniach przeglądarki i odśwież stronę, aby spróbować ponownie!");
+if(locationWatchId!==null){
+navigator.geolocation.clearWatch(locationWatchId);
+locationWatchId=null;
+}
+showLocationAlert("Nie mogę Ci teraz pokazać właściwej drogi, ponieważ dostęp do lokalizacji został zablokowany. Jeśli chcesz spróbować ponownie, zmień uprawnienia lokalizacji dla tej strony w ustawieniach przeglądarki na „Zapytaj” lub „Zezwól”, a następnie odśwież stronę.");
 return;
 }
 if(error.code===2){
