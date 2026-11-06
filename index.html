@@ -606,7 +606,7 @@ const minutes=Math.round(route.duration/60);
 const hours=Math.floor(minutes/60);
 const remainingMinutes=minutes%60;
 const durationText=hours>0?hours+" godz. "+remainingMinutes+" min":minutes+" min";
-setRouteStatus((mode==="foot"?"Trasa piesza":"Trasa samochodowa")+ "-" + "ok" +distance+" km - "+durationText,true);
+setRouteStatus((mode==="foot"?"Trasa piesza":"Trasa samochodowa")+" - ok. "+distance+" km - "+durationText,true);
 animateRoute(routeGeometry,mode);
 fitRoute();
 if(userLocation)checkRoutePosition(30);
