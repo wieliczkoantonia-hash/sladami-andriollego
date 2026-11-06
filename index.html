@@ -142,12 +142,31 @@ button:focus-visible{outline:3px solid #a06a36;outline-offset:3px}
 .finish-actions button.secondary{background:#fffdf7;color:#294d3b}
 @media(max-width:700px){
 .leaflet-control-zoom{
-transform:scale(.75);
+transform:scale(.65);
 transform-origin:top left;
 }
-.leaflet-top.leaflet-left{
-top:8px;
+.leaflet-bottom.leaflet-right{
+bottom:82px;
+right:10px;
+}
+.leaflet-bottom.leaflet-left{
+bottom:82px;
 left:8px;
+}
+}
+@media(max-width:650px){
+.leaflet-control-zoom{
+transform:scale(.58);
+}
+.leaflet-bottom.leaflet-right{
+bottom:82px;
+right:8px;
+}
+.leaflet-bottom.leaflet-left{
+bottom:82px;
+left:8px;
+}
+}
 }
 }
 </style>
