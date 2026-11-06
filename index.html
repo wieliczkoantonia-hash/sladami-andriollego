@@ -570,7 +570,7 @@ async function drawRoute(mode){
 const requestId=++routeRequestId;
 clearRoute();
 setRouteButtonsDisabled(true);
-setRouteStatus(mode==="foot"?"Obliczanie optymalnej trasy…":"Obliczanie optymalnej trasy…");
+setRouteStatus("Obliczanie optymalnej trasy…");
 const controller=new AbortController();
 const timeout=setTimeout(()=>controller.abort(),30000);
 try{
@@ -578,22 +578,22 @@ const coordinates=stops.map(stop=>stop.coords[1]+","+stop.coords[0]).join(";");
 const service=mode==="foot"?"https://routing.openstreetmap.de/routed-foot/":"https://routing.openstreetmap.de/routed-car/";
 const tableUrl=service+"table/v1/driving/"+coordinates+"?annotations=distance,duration";
 const tableResponse=await fetch(tableUrl,{signal:controller.signal});
-if(!tableResponse.ok)throw new Error("Nie udało się pobrać odległości między punktami.");
+if(!tableResponse.ok)throw new Error("Tabela odległości: HTTP "+tableResponse.status);
 const tableData=await tableResponse.json();
 if(requestId!==routeRequestId)return;
-if(tableData.code!=="Ok"||!Array.isArray(tableData.distances)||tableData.distances.length!==stops.length)throw new Error("Serwer nie zwrócił pełnej tabeli odległości.");
+if(tableData.code!=="Ok"||!Array.isArray(tableData.distances)||tableData.distances.length!==stops.length)throw new Error("Nieprawidłowa tabela odległości: "+(tableData.message||tableData.code||"brak danych"));
 const order=optimizeRouteOrder(tableData.distances);
-if(order.length!==stops.length||new Set(order).size!==stops.length||order[0]!==0||order[order.length-1]!==8)throw new Error("Nie udało się ustalić prawidłowej kolejności punktów.");
+if(order.length!==stops.length||new Set(order).size!==stops.length||order[0]!==0||order[order.length-1]!==8)throw new Error("Nieprawidłowa kolejność punktów.");
 const orderedCoordinates=order.map(index=>stops[index].coords[1]+","+stops[index].coords[0]).join(";");
-setRouteStatus("Wyznaczanie trasy…");
+setRouteStatus("Wyznaczanie przebiegu trasy…");
 const routeUrl=service+"route/v1/driving/"+orderedCoordinates+"?overview=full&geometries=geojson&steps=false";
 const routeResponse=await fetch(routeUrl,{signal:controller.signal});
-if(!routeResponse.ok)throw new Error("Nie udało się pobrać trasy.");
+if(!routeResponse.ok)throw new Error("Wyznaczanie przebiegu trasy: HTTP "+routeResponse.status);
 const routeData=await routeResponse.json();
 if(requestId!==routeRequestId)return;
-if(routeData.code!=="Ok"||!routeData.routes||!routeData.routes.length)throw new Error("Serwer nie zwrócił trasy.");
+if(routeData.code!=="Ok"||!routeData.routes||!routeData.routes.length)throw new Error("Serwer nie zwrócił trasy: "+(routeData.message||routeData.code||"brak danych"));
 const route=routeData.routes[0];
-if(!route.geometry||!Array.isArray(route.geometry.coordinates)||!Number.isFinite(route.duration)||!Number.isFinite(route.distance))throw new Error("Serwer nie zwrócił pełnych danych trasy.");
+if(!route.geometry||!Array.isArray(route.geometry.coordinates)||!Number.isFinite(route.duration)||!Number.isFinite(route.distance))throw new Error("Serwer zwrócił niekompletne dane trasy.");
 routeStopOrder=order;
 buildList();
 drawMarkers();
@@ -616,7 +616,7 @@ console.error("Błąd wyznaczania trasy:",error);
 if(error.name==="AbortError"){
 setRouteStatus("Serwer nie odpowiedział w ciągu 30 sekund. Spróbuj ponownie.",true);
 }else{
-setRouteStatus("Nie udało się obliczyć trasy. Sprawdź połączenie i spróbuj ponownie.",true);
+setRouteStatus("Błąd wyznaczania trasy: "+error.message,true);
 }
 }finally{
 clearTimeout(timeout);
