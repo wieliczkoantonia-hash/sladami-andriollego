@@ -94,6 +94,7 @@ button:focus-visible{outline:3px solid #a06a36;outline-offset:3px}
 .legend-symbol.nature{border:2px dashed #294d3b;border-radius:50%;background:#dfe8dc}
 .legend-symbol.andriolli{width:11px;height:11px;flex-basis:11px;margin:0 1px;background:#536b78;transform:rotate(45deg)}
 .legend-symbol.start{border-radius:50%;background:#294d3b}
+.legend-symbol.finish{border-radius:50%;background:#762f42}
 .legend-toggle{display:none;position:absolute;z-index:560;top:9px;left:9px;padding:8px 11px;border:1px solid #cfcdbb;border-radius:3px;background:#fffdf7;color:#202a24;font:11px Arial,sans-serif;box-shadow:0 2px 8px #30291e20}
 .map-layout.panel-open .legend-toggle{display:none}
 .stop-photo{margin:0 0 17px;background:#fffdf7;border:1px solid #cfcdbb}
@@ -450,7 +451,8 @@ buildList();
 const legend=L.control({position:"bottomleft"});
 legend.onAdd=function(){
 const div=L.DomUtil.create("div","map-legend");
-div.innerHTML='<div class="map-legend-title">Legenda</div><div class="map-legend-row"><span class="legend-symbol history"></span>Historia</div><div class="map-legend-row"><span class="legend-symbol architecture"></span>Architektura</div><div class="map-legend-row"><span class="legend-symbol nature"></span>Odpoczynek</div><div class="map-legend-row"><span class="legend-symbol andriolli"></span>Miejsca Andriollego</div><div class="map-legend-row"><span class="legend-symbol start"></span>Początek trasy</div>';
+div.innerHTML='<div class="map-legend-title">Legenda</div><div class="map-legend-row"><span class="legend-symbol history"></span>Historia</div><div class="map-legend-row"><span class="legend-symbol architecture"></span>Architektura</div><div class="map-legend-row"><span class="legend-symbol nature"></span>Odpoczynek</div><div class="map-legend-row"><span class="legend-symbol andriolli"></span>Miejsca Andriollego</div>
+<div class="map-legend-row"><span class="legend-symbol start"></span>Początek trasy</div><div class="map-legend-row"><span class="legend-symbol finish"></span>Koniec trasy</div>';
 L.DomEvent.disableClickPropagation(div);
 L.DomEvent.disableScrollPropagation(div);
 return div;
