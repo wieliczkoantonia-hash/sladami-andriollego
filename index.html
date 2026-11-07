@@ -244,6 +244,7 @@ let userLocation=null,userLocationMarker=null,userAccuracyCircle=null,locationWa
 let routeNavigationProgress=null,routeOffRouteCount=0,wrongDirectionCount=0;
 const center=[52.108,21.276];
 const MAP_BOUNDS=L.latLngBounds([52.075,21.238],[52.158,21.322]);
+
 function enterMap(){
 document.getElementById("cover").style.display="none";
 document.body.classList.add("map-active");
@@ -251,14 +252,13 @@ document.getElementById("map-page").style.display="flex";
 if(!map)initMap();
 setTimeout(()=>{
 map.invalidateSize();
-if(userLocation){
-map.setView(userLocation,16,{animate:true});
-}else{
+if(!userLocation){
 fitRoute();
 }
 startLocationTracking();
 },180);
 }
+
 function startLocationTracking(){
 if(locationStarted)return;
 if(!navigator.geolocation){
@@ -302,6 +302,7 @@ const alert=document.getElementById("location-alert");
 alert.querySelector("p").textContent=message;
 alert.classList.add("visible");
 }
+
 function updateUserLocation(position){
 const lat=position.coords.latitude;
 const lng=position.coords.longitude;
@@ -322,13 +323,12 @@ userAccuracyCircle.setRadius(accuracy);
 if(!hasCenteredOnUser){
 hasCenteredOnUser=true;
 map.setView(userLocation,16,{animate:true});
-}else if(!map.getBounds().contains(userLocation)){
-map.setView(userLocation,Math.max(map.getZoom(),15),{animate:true});
 }
 if(activeRouteMode&&routeGeometry&&routeGeometry.length>1){
 checkRoutePosition(accuracy);
 }
 }
+
 function handleLocationError(error){
 if(error.code===1){
 locationStarted=false;
