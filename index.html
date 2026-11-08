@@ -243,7 +243,7 @@ let routeGeometry=null;
 let userLocation=null,userLocationMarker=null,userAccuracyCircle=null,locationWatchId=null,locationStarted=false,hasCenteredOnUser=false;
 let routeNavigationProgress=null,routeOffRouteCount=0,wrongDirectionCount=0;
 const center=[52.108,21.276];
-const MAP_BOUNDS=L.latLngBounds([52.075,21.190],[52.158,21.322]);
+const MAP_BOUNDS=L.latLngBounds([52.065,21.175],[52.170,21.340]);
 function enterMap(){
 document.getElementById("cover").style.display="none";
 document.body.classList.add("map-active");
@@ -433,7 +433,7 @@ L.marker(s.coords,{icon,zIndexOffset:1000}).addTo(markerLayer).bindTooltip(s.nam
 });
 }
 function initMap(){
-map=L.map("map",{zoomControl:false,minZoom:12,maxZoom:19,zoomSnap:0.1,zoomDelta:0.5,wheelPxPerZoomLevel:80,maxBounds:MAP_BOUNDS,maxBoundsViscosity:.65,dragging:true,touchZoom:true,scrollWheelZoom:true,doubleClickZoom:true,boxZoom:false,keyboard:true,bounceAtZoomLimits:false}).setView(center,13);
+map=L.map("map",{zoomControl:false,minZoom:12,maxZoom:19,zoomSnap:0.1,zoomDelta:0.5,wheelPxPerZoomLevel:80,maxBounds:MAP_BOUNDS,maxBoundsViscosity:1,,dragging:true,touchZoom:true,scrollWheelZoom:true,doubleClickZoom:true,boxZoom:false,keyboard:true,bounceAtZoomLimits:false}).setView(center,13);
 map.createPane("routePane");
 map.getPane("routePane").style.zIndex=350;
 L.control.zoom({position:"bottomright"}).addTo(map);
@@ -451,7 +451,6 @@ return div;
 };
 legend.addTo(map);
 legend.getContainer().classList.add("legend-control");
-map.setMaxBounds(MAP_BOUNDS);
 map.on("zoomend",()=>map.invalidateSize({pan:false}));
 }
 function toggleLegend(){
