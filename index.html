@@ -341,7 +341,7 @@ setNavigationStatus("Nie udało się ustalić Twojej lokalizacji. Sprawdź, czy 
 return;
 }
 if(error.code===3){
-setNavigationStatus("Ustalanie lokalizacji trwa zbyt długo. Poczekaj chwilę na sygnał GPS.",true);
+setNavigationStatus("Ustalanie lokalizacji trwa zbyt długo. Poczekaj chwilę .",true);
 return;
 }
 setNavigationStatus("Wystąpił problem z ustaleniem lokalizacji.",true);
@@ -803,7 +803,7 @@ start.textContent="Poskładaj Gurewicza";
 const board=document.createElement("div");
 board.className="gp-board";
 board.hidden=true;
-board.setAttribute("aria-label","Układanka ze zdjęcia pensjonatu");
+board.setAttribute("aria-label","Układanka pensjonatu");
 const message=document.createElement("p");
 message.className="gp-message";
 message.setAttribute("aria-live","polite");
