@@ -553,11 +553,9 @@ return total;
 }
 function optimizeRouteOrder(matrix){
 const count=matrix.length;
-const start=0;
-const finish=count-1;
-const remaining=new Set(Array.from({length:count},(_,i)=>i).filter(i=>i!==start&&i!==finish));
-const order=[start];
-let current=start;
+const order=[0];
+const remaining=new Set(Array.from({length:count},(_,i)=>i).filter(i=>i!==0));
+let current=0;
 while(remaining.size){
 let nearest=null;
 let nearestDistance=Infinity;
@@ -573,15 +571,14 @@ order.push(nearest);
 remaining.delete(nearest);
 current=nearest;
 }
-order.push(finish);
 let improved=true;
 let passes=0;
 while(improved&&passes<100){
 improved=false;
 passes++;
 let bestCost=getRouteCost(order,matrix);
-for(let i=1;i<order.length-2;i++){
-for(let j=i+1;j<order.length-1;j++){
+for(let i=1;i<order.length-1;i++){
+for(let j=i+1;j<order.length;j++){
 const candidate=order.slice();
 const reversed=candidate.slice(i,j+1).reverse();
 candidate.splice(i,j-i+1,...reversed);
@@ -594,7 +591,7 @@ improved=true;
 }
 }
 }
-return order;
+return order.slice(1).map(index=>index-1);
 }
 async function drawRoute(mode){
 const requestId=++routeRequestId;
@@ -618,15 +615,16 @@ routeController=controller;
 const timeout=setTimeout(()=>controller.abort(),45000);
 try{
 const stopCoordinates=stops.map(stop=>stop.coords[1]+","+stop.coords[0]);
+const tableCoordinates=[userLocation.lng+","+userLocation.lat,...stopCoordinates];
 const service=mode==="foot"?"https://routing.openstreetmap.de/routed-foot/":"https://routing.openstreetmap.de/routed-car/";
-const tableUrl=service+"table/v1/driving/"+stopCoordinates.join(";")+"?annotations=distance,duration";
+const tableUrl=service+"table/v1/driving/"+tableCoordinates.join(";")+"?annotations=distance,duration";
 const tableResponse=await fetch(tableUrl,{signal:controller.signal});
 if(!tableResponse.ok)throw new Error("Tabela odległości: HTTP "+tableResponse.status);
 const tableData=await tableResponse.json();
 if(requestId!==routeRequestId)return;
-if(tableData.code!=="Ok"||!Array.isArray(tableData.distances)||tableData.distances.length!==stops.length)throw new Error("Nieprawidłowa tabela odległości: "+(tableData.message||tableData.code||"brak danych"));
+if(tableData.code!=="Ok"||!Array.isArray(tableData.distances)||tableData.distances.length!==stops.length+1)throw new Error("Nieprawidłowa tabela odległości: "+(tableData.message||tableData.code||"brak danych"));
 const order=optimizeRouteOrder(tableData.distances);
-if(order.length!==stops.length||new Set(order).size!==stops.length||order[0]!==0||order[order.length-1]!==stops.length-1)throw new Error("Nieprawidłowa kolejność punktów.");
+if(order.length!==stops.length||new Set(order).size!==stops.length||order.some(index=>!Number.isInteger(index)||index<0||index>=stops.length))throw new Error("Nieprawidłowa kolejność punktów.");
 const orderedStopCoordinates=order.map(index=>stopCoordinates[index]);
 const allCoordinates=[userLocation.lng+","+userLocation.lat,...orderedStopCoordinates];
 const routeUrl=service+"route/v1/driving/"+allCoordinates.join(";")+"?overview=full&geometries=geojson&steps=false";
