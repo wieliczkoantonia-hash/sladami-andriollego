@@ -81,6 +81,7 @@ button:focus-visible{outline:3px solid #a06a36;outline-offset:3px}
 .story-nav button:active{background:#e2e7dc}
 .map-number{display:grid;place-items:center;width:29px;height:29px;border:2px solid #f1eee4;border-radius:50%;background:#762f42;color:white;box-shadow:0 2px 7px #1f1b1740;font:bold 11px Arial,sans-serif;position:relative}
 .map-number.start{width:37px;height:37px;background:#294d3b;font-size:10px}
+.map-number.finish{width:37px;height:37px;background:#762f42;font-size:10px}
 .map-number.architecture{border-radius:5px;background:#94734f}
 .map-number.nature{background:#294d3b;border-style:dashed}
 .map-number.andriolli{border-radius:3px;background:#536b78;transform:rotate(45deg)}
@@ -94,6 +95,7 @@ button:focus-visible{outline:3px solid #a06a36;outline-offset:3px}
 .legend-symbol.nature{border:2px dashed #294d3b;border-radius:50%;background:#dfe8dc}
 .legend-symbol.andriolli{width:11px;height:11px;flex-basis:11px;margin:0 1px;background:#536b78;transform:rotate(45deg)}
 .legend-symbol.start{border-radius:50%;background:#294d3b}
+.legend-symbol.finish{border-radius:50%;background:#762f42}
 .legend-toggle{display:none;position:absolute;z-index:560;top:9px;left:9px;padding:8px 11px;border:1px solid #cfcdbb;border-radius:3px;background:#fffdf7;color:#202a24;font:11px Arial,sans-serif;box-shadow:0 2px 8px #30291e20}
 .map-layout.panel-open .legend-toggle{display:none}
 .stop-photo{margin:0 0 17px;background:#fffdf7;border:1px solid #cfcdbb}
@@ -428,10 +430,12 @@ if(!markerLayer)return;
 markerLayer.clearLayers();
 routeStopOrder.forEach((stopIndex,position)=>{
 const s=stops[stopIndex];
-const symbol=position===0?"start":getMapSymbol(s);
-const label=position===0?"START":position+1;
-const size=position===0?[37,37]:[29,29];
-const anchor=position===0?[18,18]:[14,14];
+const isStart=position===0;
+const isFinish=position===routeStopOrder.length-1;
+const symbol=isStart?"start":isFinish?"finish":getMapSymbol(s);
+const label=isStart?"START":isFinish?"META":position+1;
+const size=isStart||isFinish?[37,37]:[29,29];
+const anchor=isStart||isFinish?[18,18]:[14,14];
 const icon=L.divIcon({className:"",html:`<div class="map-number ${symbol}"><span>${label}</span></div>`,iconSize:size,iconAnchor:anchor});
 L.marker(s.coords,{icon,zIndexOffset:1000}).addTo(markerLayer).bindTooltip(s.name).on("click",()=>openStop(stopIndex));
 });
@@ -448,7 +452,7 @@ buildList();
 const legend=L.control({position:"bottomleft"});
 legend.onAdd=function(){
 const div=L.DomUtil.create("div","map-legend");
-div.innerHTML='<div class="map-legend-title">Legenda</div><div class="map-legend-row"><span class="legend-symbol history"></span>Historia</div><div class="map-legend-row"><span class="legend-symbol architecture"></span>Architektura</div><div class="map-legend-row"><span class="legend-symbol nature"></span>Odpoczynek</div><div class="map-legend-row"><span class="legend-symbol andriolli"></span>Miejsca Andriollego</div><div class="map-legend-row"><span class="legend-symbol start"></span>Początek trasy</div>';
+div.innerHTML='<div class="map-legend-title">Legenda</div><div class="map-legend-row"><span class="legend-symbol history"></span>Historia</div><div class="map-legend-row"><span class="legend-symbol architecture"></span>Architektura</div><div class="map-legend-row"><span class="legend-symbol nature"></span>Odpoczynek</div><div class="map-legend-row"><span class="legend-symbol andriolli"></span>Miejsca Andriollego</div><div class="map-legend-row"><span class="legend-symbol start"></span>Początek trasy</div><div class="map-legend-row"><span class="legend-symbol finish"></span>Koniec trasy</div>';
 L.DomEvent.disableClickPropagation(div);
 L.DomEvent.disableScrollPropagation(div);
 return div;
@@ -550,7 +554,7 @@ return total;
 function optimizeRouteOrder(matrix){
 const count=matrix.length;
 const start=0;
-const finish=9;
+const finish=count-1;
 const remaining=new Set(Array.from({length:count},(_,i)=>i).filter(i=>i!==start&&i!==finish));
 const order=[start];
 let current=start;
@@ -613,20 +617,20 @@ const controller=new AbortController();
 routeController=controller;
 const timeout=setTimeout(()=>controller.abort(),45000);
 try{
-const allCoordinates=[userLocation.lng+","+userLocation.lat,...stops.map(stop=>stop.coords[1]+","+stop.coords[0])];
-const coordinates=allCoordinates.join(";");
+const stopCoordinates=stops.map(stop=>stop.coords[1]+","+stop.coords[0]);
 const service=mode==="foot"?"https://routing.openstreetmap.de/routed-foot/":"https://routing.openstreetmap.de/routed-car/";
-const tableUrl=service+"table/v1/driving/"+coordinates+"?annotations=distance,duration";
+const tableUrl=service+"table/v1/driving/"+stopCoordinates.join(";")+"?annotations=distance,duration";
 const tableResponse=await fetch(tableUrl,{signal:controller.signal});
 if(!tableResponse.ok)throw new Error("Tabela odległości: HTTP "+tableResponse.status);
 const tableData=await tableResponse.json();
 if(requestId!==routeRequestId)return;
-if(tableData.code!=="Ok"||!Array.isArray(tableData.distances)||tableData.distances.length!==allCoordinates.length)throw new Error("Nieprawidłowa tabela odległości: "+(tableData.message||tableData.code||"brak danych"));
+if(tableData.code!=="Ok"||!Array.isArray(tableData.distances)||tableData.distances.length!==stops.length)throw new Error("Nieprawidłowa tabela odległości: "+(tableData.message||tableData.code||"brak danych"));
 const order=optimizeRouteOrder(tableData.distances);
-if(order.length!==allCoordinates.length||new Set(order).size!==allCoordinates.length||order[0]!==0||order[order.length-1]!==9)throw new Error("Nieprawidłowa kolejność punktów.");
-const orderedCoordinates=order.map(index=>allCoordinates[index]).join(";");
+if(order.length!==stops.length||new Set(order).size!==stops.length||order[0]!==0||order[order.length-1]!==stops.length-1)throw new Error("Nieprawidłowa kolejność punktów.");
+const orderedStopCoordinates=order.map(index=>stopCoordinates[index]);
+const allCoordinates=[userLocation.lng+","+userLocation.lat,...orderedStopCoordinates];
+const routeUrl=service+"route/v1/driving/"+allCoordinates.join(";")+"?overview=full&geometries=geojson&steps=false";
 setRouteStatus("Wyznaczanie przebiegu trasy…");
-const routeUrl=service+"route/v1/driving/"+orderedCoordinates+"?overview=full&geometries=geojson&steps=false";
 const routeResponse=await fetch(routeUrl,{signal:controller.signal});
 if(!routeResponse.ok)throw new Error("Wyznaczanie przebiegu trasy: HTTP "+routeResponse.status);
 const routeData=await routeResponse.json();
@@ -634,7 +638,7 @@ if(requestId!==routeRequestId)return;
 if(routeData.code!=="Ok"||!routeData.routes||!routeData.routes.length)throw new Error("Serwer nie zwrócił trasy: "+(routeData.message||routeData.code||"brak danych"));
 const route=routeData.routes[0];
 if(!route.geometry||!Array.isArray(route.geometry.coordinates)||!Number.isFinite(route.duration)||!Number.isFinite(route.distance))throw new Error("Serwer zwrócił niekompletne dane trasy.");
-routeStopOrder=order.slice(1).map(index=>index-1);
+routeStopOrder=order.slice();
 buildList();
 drawMarkers();
 routeGeometry=route.geometry.coordinates.map(point=>[point[1],point[0]]);
@@ -662,6 +666,8 @@ setRouteStatus("Błąd wyznaczania trasy: "+error.message,true);
 clearTimeout(timeout);
 if(routeController===controller)routeController=null;
 if(requestId===routeRequestId)setRouteButtonsDisabled(false);
+}
+}
 }
 }
 function animateRoute(coords,mode){
