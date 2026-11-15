@@ -272,7 +272,7 @@ if(typeof permissionCheck==="function"){
 navigator.permissions.query({name:"geolocation"}).then(permission=>{
 if(permission.state==="denied"){
 locationStarted=false;
-showLocationAlert("Dostęp do lokalizacji jest zablokowany w ustawieniach przeglądarki. Zmień uprawnienia lokalizacji dla tej strony na „Zapytaj” lub „Zezwól”, a następnie odśwież stronę.");
+showLocationAlert("Nie mogę Ci teraz pokazać drogi, bo nie udostępniasz swojej lokalizacji. Zmień uprawnienia lokalizacji dla tej strony w ustawieniach przeglądarki.");
 return;
 }
 watchUserLocation();
