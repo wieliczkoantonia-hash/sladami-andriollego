@@ -339,7 +339,7 @@ if(locationWatchId!==null){
 navigator.geolocation.clearWatch(locationWatchId);
 locationWatchId=null;
 }
-showLocationAlert("Nie mogę Ci teraz pokazać właściwej drogi, ponieważ dostęp do lokalizacji został zablokowany. Jeśli chcesz spróbować ponownie, zmień uprawnienia lokalizacji dla tej strony w ustawieniach przeglądarki na „Zapytaj” lub „Zezwól”, a następnie odśwież stronę.");
+showLocationAlert("Nie mogę Ci teraz pokazać drogi, bo nie udostępniasz swojej lokalizacji. Zmień uprawnienia lokalizacji dla tej strony w ustawieniach przeglądarki.");
 return;
 }
 if(error.code===2){
