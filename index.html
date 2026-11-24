@@ -681,9 +681,9 @@ function animateRoute(coords,mode){
 if(routeAnimationFrame)cancelAnimationFrame(routeAnimationFrame);
 if(routeLine)map.removeLayer(routeLine);
 if(routeOutline)map.removeLayer(routeOutline);
-const color=mode==="foot"?"#762f42":"#536b78";
-routeOutline=L.polyline([],{color:"#fffdf7",weight:9,opacity:.9,lineCap:"round",lineJoin:"round"}).addTo(map);
-routeLine=L.polyline([],{color,weight:5,opacity:.95,lineCap:"round",lineJoin:"round",dashArray:mode==="foot"?"":"10 8"}).addTo(map);
+const color=mode==="foot"?"#527b91":"#6b8290";
+routeOutline=L.polyline([],{color:"#fffdf7",weight:5,opacity:.75,lineCap:"round",lineJoin:"round"}).addTo(map);
+routeLine=L.polyline([],{color,weight:3,opacity:.9,lineCap:"round",lineJoin:"round",dashArray:mode==="foot"?"":"10 8"}).addTo(map);
 const points=coords.map(point=>L.latLng(point));
 const lengths=[0];
 for(let i=1;i<points.length;i++)lengths.push(lengths[i-1]+points[i-1].distanceTo(points[i]));
