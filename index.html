@@ -79,23 +79,24 @@ button:focus-visible{outline:3px solid #a06a36;outline-offset:3px}
 .story-nav{display:flex;gap:5px;flex-shrink:0}
 .story-nav button{padding:9px 10px;border:1px solid #c8bba8;background:#fffdf7;color:#202a24;font:11px Arial,sans-serif;white-space:nowrap;min-height:35px}
 .story-nav button:active{background:#e2e7dc}
-.map-number{display:grid;place-items:center;width:29px;height:29px;border:2px solid #f1eee4;border-radius:50%;background:#762f42;color:white;box-shadow:0 2px 7px #1f1b1740;font:bold 11px Arial,sans-serif;position:relative}
-.map-number.start{width:37px;height:37px;background:#294d3b;font-size:10px}
-.map-number.finish{width:37px;height:37px;background:#762f42;font-size:10px}
-.map-number.architecture{border-radius:5px;background:#94734f}
-.map-number.nature{background:#294d3b;border-style:dashed}
-.map-number.andriolli{border-radius:3px;background:#536b78;transform:rotate(45deg)}
-.map-number.andriolli span{transform:rotate(-45deg)}
+.map-marker{width:42px;height:49px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;position:relative;filter:drop-shadow(0 2px 2px #30291e55);color:#762f42}
+.map-marker-art{width:29px;height:29px;display:block;overflow:visible}
+.map-marker-number{display:grid;place-items:center;min-width:21px;height:19px;margin-top:-2px;padding:0 5px;border:1px solid #f1eee4;border-radius:10px;background:#762f42;color:#fffdf7;font:bold 10px Arial,sans-serif;line-height:1;box-shadow:0 1px 3px #30291e45}
+.map-marker.architecture{color:#795e45}
+.map-marker.rest{color:#294d3b}
+.map-marker.start,.map-marker.finish{width:48px;height:52px}
+.map-marker.start .map-marker-art,.map-marker.finish .map-marker-art{width:34px;height:34px}
+.map-marker.start .map-marker-number{background:#294d3b}
+.map-marker.finish .map-marker-number{background:#762f42}
 .map-legend{padding:10px 12px;background:rgba(255,253,247,.97);border:1px solid #cfcdbb;box-shadow:0 2px 9px #30291e20;color:#202a24;font:11px/1.6 Arial,sans-serif}
 .map-legend-title{margin-bottom:5px;color:#762f42;font:bold 10px Arial,sans-serif;letter-spacing:1px;text-transform:uppercase}
 .map-legend-row{display:flex;align-items:center;gap:8px;white-space:nowrap}
-.legend-symbol{display:inline-block;width:13px;height:13px;flex:0 0 13px;border:2px solid #f1eee4;box-shadow:0 1px 3px #0003}
-.legend-symbol.history{border-radius:50%;background:#762f42}
-.legend-symbol.architecture{border-radius:3px;background:#94734f}
-.legend-symbol.nature{border:2px dashed #294d3b;border-radius:50%;background:#dfe8dc}
-.legend-symbol.andriolli{width:11px;height:11px;flex-basis:11px;margin:0 1px;background:#536b78;transform:rotate(45deg)}
-.legend-symbol.start{border-radius:50%;background:#294d3b}
-.legend-symbol.finish{border-radius:50%;background:#762f42}
+.legend-symbol{display:inline-flex;width:20px;height:20px;flex:0 0 20px;align-items:center;justify-content:center;color:#762f42}
+.legend-symbol svg{display:block;width:20px;height:20px}
+.legend-symbol.architecture{color:#795e45}
+.legend-symbol.rest{color:#294d3b}
+.legend-symbol.start{color:#294d3b}
+.legend-symbol.finish{color:#762f42}
 .legend-toggle{display:none;position:absolute;z-index:560;top:9px;left:9px;padding:8px 11px;border:1px solid #cfcdbb;border-radius:3px;background:#fffdf7;color:#202a24;font:11px Arial,sans-serif;box-shadow:0 2px 8px #30291e20}
 .map-layout.panel-open .legend-toggle{display:none}
 .stop-photo{margin:0 0 17px;background:#fffdf7;border:1px solid #cfcdbb}
@@ -420,10 +421,19 @@ document.getElementById("map-page").style.display="none";
 document.getElementById("cover").style.display="grid";
 }
 function getMapSymbol(s){
-if(s.name==="Brzegi Michała Elwiro Andriollego")return "andriolli";
 if(s.category==="Architektura")return "architecture";
-if(s.category==="Odpoczynek")return "nature";
+if(s.category==="Odpoczynek")return "rest";
 return "history";
+}
+function getSymbolSvg(type){
+const paths={
+history:'<path d="M4 6.5c3.2-1.5 6.1-.8 8 1.1 1.9-1.9 4.8-2.6 8-1.1v12c-3.2-1.5-6.1-.8-8 1.1-1.9-1.9-4.8-2.6-8-1.1z"/><path d="M12 7.6v12M6.5 9.2c1.7-.5 3.2-.1 4.3.7M17.5 9.2c-1.7-.5-3.2-.1-4.3.7M6.5 12.5c1.7-.5 3.2-.1 4.3.7M17.5 12.5c-1.7-.5-3.2-.1-4.3.7"/>',
+architecture:'<path d="m3 10 9-7 9 7v10H3z"/><path d="M8 20v-7h8v7M6 10h12M10 7h4"/>',
+rest:'<path d="M4 11v6M20 11v6M4 14h16M6 10V8a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v6M12 11V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v5M3 17v3M21 17v3"/>',
+start:'<path d="M12 2 5 11h4l-6 7h8l1 3 1-3h8l-6-7h4z" fill="currentColor" stroke="none"/><path d="M12 19v3" stroke="#795e45" stroke-width="2"/>',
+finish:'<path d="M6 21V3M6 4h12l-3 4 3 4H6"/>'
+};
+return '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+paths[type]+'</svg>';
 }
 function drawMarkers(){
 if(!markerLayer)return;
@@ -434,9 +444,10 @@ const isStart=position===0;
 const isFinish=position===routeStopOrder.length-1;
 const symbol=isStart?"start":isFinish?"finish":getMapSymbol(s);
 const label=isStart?"START":isFinish?"META":position+1;
-const size=isStart||isFinish?[37,37]:[29,29];
-const anchor=isStart||isFinish?[18,18]:[14,14];
-const icon=L.divIcon({className:"",html:`<div class="map-number ${symbol}"><span>${label}</span></div>`,iconSize:size,iconAnchor:anchor});
+const size=isStart||isFinish?[48,52]:[42,49];
+const anchor=isStart||isFinish?[24,48]:[21,45];
+const html=`<div class="map-marker ${symbol}"><span class="map-marker-art">${getSymbolSvg(symbol)}</span><span class="map-marker-number">${label}</span></div>`;
+const icon=L.divIcon({className:"",html,iconSize:size,iconAnchor:anchor});
 L.marker(s.coords,{icon,zIndexOffset:1000}).addTo(markerLayer).bindTooltip(s.name).on("click",()=>openStop(stopIndex));
 });
 }
@@ -452,7 +463,7 @@ buildList();
 const legend=L.control({position:"bottomleft"});
 legend.onAdd=function(){
 const div=L.DomUtil.create("div","map-legend");
-div.innerHTML='<div class="map-legend-title">Legenda</div><div class="map-legend-row"><span class="legend-symbol history"></span>Historia</div><div class="map-legend-row"><span class="legend-symbol architecture"></span>Architektura</div><div class="map-legend-row"><span class="legend-symbol nature"></span>Odpoczynek</div><div class="map-legend-row"><span class="legend-symbol andriolli"></span>Miejsca Andriollego</div><div class="map-legend-row"><span class="legend-symbol start"></span>Początek trasy</div><div class="map-legend-row"><span class="legend-symbol finish"></span>Koniec trasy</div>';
+div.innerHTML='<div class="map-legend-title">Legenda</div><div class="map-legend-row"><span class="legend-symbol">'+getSymbolSvg("history")+'</span>Historia</div><div class="map-legend-row"><span class="legend-symbol architecture">'+getSymbolSvg("architecture")+'</span>Architektura</div><div class="map-legend-row"><span class="legend-symbol rest">'+getSymbolSvg("rest")+'</span>Odpoczynek</div><div class="map-legend-row"><span class="legend-symbol start">'+getSymbolSvg("start")+'</span>Początek trasy</div><div class="map-legend-row"><span class="legend-symbol finish">'+getSymbolSvg("finish")+'</span>Koniec trasy</div>';
 L.DomEvent.disableClickPropagation(div);
 L.DomEvent.disableScrollPropagation(div);
 return div;
