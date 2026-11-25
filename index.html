@@ -903,7 +903,7 @@ drawBoard();
 if(correctCount()===9){
 finished=true;
 board.querySelectorAll("button").forEach(button=>button.disabled=true);
-message.textContent=mistakes===0?"Brawo! Znasz pensjonat Gurewicza na wylot!":"Udało się! Gurewicz znów jest w całości.";
+message.textContent=mistakes===0?"Udało się! Gurewicz znów jest w całości.";
 start.hidden=false;
 start.textContent="Ułóż jeszcze raz";
 }
